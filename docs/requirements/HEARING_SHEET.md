@@ -51,6 +51,8 @@
 | 必要なコンテンツ種類（文章/画像/動画/資料DL） | TBD | Must |
 | 実績の掲載方針（守秘の扱い） | TBD | Should |
 | 更新頻度（ブログ等） | TBD | Could |
+| CMS選定（MicroCMS/Contentful/WordPress API等）※WPは公開APIのみ推奨 | TBD | Should |
+| 下書きプレビュー機能の必要性（ヘッドレスCMS時は実装コスト増） | TBD | Should |
 | 著者情報/監修の扱い（E-E-A-T） | TBD | Should |
 
 ---
@@ -85,6 +87,7 @@
 | フォームのスパム対策（reCAPTCHA等） | TBD | Could |
 | レート制限 | TBD | Should |
 | 依存脆弱性/secret検出を必須化 | TBD | Must |
+| クッキー同意（CMP/GDPR/改正電気通信事業法）の要否 | TBD | Should |
 
 ---
 
@@ -105,6 +108,7 @@
 | デプロイ先候補（Vercel/Render等） | TBD | Should |
 | 環境（dev/staging/prod） | TBD | Must |
 | ブランチ→環境デプロイ方針 | TBD | Must |
+| メール送信プロバイダ（SendGrid/AWS SES/Gmail等） | TBD | Should |
 | ログ閲覧方法（管理画面/外部） | TBD | Must |
 
 ---
@@ -115,7 +119,8 @@
 |---|---|---|
 | パフォーマンス目標（CWVなど） | TBD | Should |
 | 可用性（ダウン許容） | TBD | Could |
-| バックアップ/復旧方針 | TBD | Should |
+| バックアップ/復旧方針（CMS/外部サービス上のデータ含む） | TBD | Should |
+| ソースコードのバックアップ運用（GitHub障害対策） | TBD | Should |
 | 監視（必要度） | TBD | Could |
 
 ---
