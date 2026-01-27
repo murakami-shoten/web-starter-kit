@@ -30,6 +30,7 @@
 | DAST（例:OWASP ZAP Baseline） | 代表的な脆弱性検知 | staging/preview に対して実行 |
 | Performance（Lighthouse CI） | CWV/UX | 主要URLを計測 |
 | Accessibility（Pa11y CI） | WCAGベース | 主要URL or sitemap 対象 |
+| E2E Testing（例:Playwright） | 重要フローの疎通 | staging/prod デプロイ前 |
 
 ---
 
@@ -48,3 +49,4 @@
 - OWASP ZAP Baseline Action: https://github.com/zaproxy/action-baseline
 - Lighthouse CI: https://github.com/GoogleChrome/lighthouse-ci
 - pa11y-ci: https://github.com/pa11y/pa11y-ci
+- Playwright: https://playwright.dev/
