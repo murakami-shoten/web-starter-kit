@@ -14,6 +14,7 @@
 - `docs/requirements/`:
   - `HEARING_SHEET.md`: ヒアリング入力フォーム。
   - `REQUIREMENTS_TEMPLATE.md`: プロジェクト固有要件定義書のテンプレ（編集禁止）。
+  - `SOW_TEMPLATE.md`: フェーズ別SOW（Statement of Work）のテンプレ。
   - `projects/`: プロジェクト別の要件定義書保存場所。
 - `docs/rules/`: 開発・アーキテクチャ・SEO・セキュリティ・可観測性・可搬性・品質ゲート等の規約群。
 - `docs/runbooks/RELEASE_CHECKLIST.md`: リリース前チェックリスト。
@@ -22,7 +23,8 @@
 1) `docs/requirements/HEARING_SHEET.md` を確認し、未記入項目をユーザーへ一問一答でヒアリング。
 2) `docs/requirements/REQUIREMENTS_TEMPLATE.md` を複製し、`docs/requirements/projects/<project_slug>/REQUIREMENTS_<project_slug>.md` を作成（テンプレは編集しない）。
 3) ヒアリング結果を転記し、TBD/リスク/矛盾を明示。対応方針を合意。
-4) `docs/rules/QUALITY_GATES.md` を満たす見通しを立ててから実装開始。
+4) 要件が合意できたら、フェーズごとに SOW を作成・合意（テンプレ: `docs/requirements/SOW_TEMPLATE.md` → 保存: `docs/requirements/projects/<project_slug>/SOW_<phase>.md`。範囲/成果物/受入基準/リスクを明記）。
+5) `docs/rules/QUALITY_GATES.md` を満たす見通しを立ててから実装開始。
 
 ## 開発・運用方針（抜粋）
 - 環境: `dev / staging / production` を環境変数で切替。ブランチ例: `dev`→dev, `staging`→staging, `main`→prod。
