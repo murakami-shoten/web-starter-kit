@@ -8,6 +8,7 @@
 
 - Next.js（App Router）+ TypeScript を前提
 - 「疎結合・拡張性・低ロックイン」を最優先に設計する
+- Next.js アプリはリポジトリ直下ではなく `frontend/` ディレクトリに配置し、将来のBFF/worker/CLI等を並列追加できるモノレポ構造を前提にする
 
 ---
 

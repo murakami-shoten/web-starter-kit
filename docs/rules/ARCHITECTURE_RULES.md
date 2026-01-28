@@ -18,6 +18,7 @@
 - Next.js（App Router）を中心に
   - UI（SSR/ISR/SSG）
   - 軽量API（Route Handlers）
+  - 配置はリポジトリ直下ではなく、将来の多サービス展開を見据えて `frontend/` ディレクトリ配下に置く
 - 重い処理は将来 Worker/BFF に分離できる設計を維持する
 - DB/Storage/Auth は差し替え可能な“境界”を作る（infra層）
 
