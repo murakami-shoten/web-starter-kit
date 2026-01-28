@@ -23,7 +23,7 @@
 
 - Lighthouse CI（主要URL）
 - Pa11y CI（主要URL）
-- OWASP ZAP Baseline（staging）
+- DAST（脆弱性診断）がパスしていること（Container/Staging）
 
 ---
 

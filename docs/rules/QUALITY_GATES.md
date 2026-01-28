@@ -27,7 +27,7 @@
 
 | ゲート | 目的 | 備考 |
 |---|---|---|
-| DAST（例:OWASP ZAP Baseline） | 代表的な脆弱性検知 | staging/preview に対して実行 |
+| DAST（例:OWASP ZAP Baseline） | 代表的な脆弱性検知 | Local/CI（コンテナ）/Staging に対して実行 |
 | Performance（Lighthouse CI） | CWV/UX | 主要URLを計測 |
 | Accessibility（Pa11y CI） | WCAGベース | 主要URL or sitemap 対象 |
 | E2E Testing（例:Playwright） | 重要フローの疎通 | staging/prod デプロイ前 |
