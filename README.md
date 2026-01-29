@@ -20,7 +20,7 @@
 - `docs/runbooks/RELEASE_CHECKLIST.md`: リリース前チェックリスト。
 
 ## 始め方（Definition of Ready）
-1) `docs/requirements/HEARING_SHEET.md` を確認し、未記入項目をユーザーへ一問一答でヒアリング。
+1) `docs/requirements/HEARING_SHEET.md` を確認し、未記入項目をユーザーへ（要件定義フェーズに限り）一問一答でヒアリング。合意済みは以後再質問しない。
 2) `docs/requirements/REQUIREMENTS_TEMPLATE.md` を複製し、`docs/requirements/projects/<project_slug>/REQUIREMENTS_<project_slug>.md` を作成（テンプレは編集しない）。
 3) ヒアリング結果を転記し、TBD/リスク/矛盾を明示。対応方針を合意。
 4) 要件が合意できたら、フェーズごとに SOW を作成・合意（テンプレ: `docs/requirements/SOW_TEMPLATE.md` → 保存: `docs/requirements/projects/<project_slug>/SOW_<phase>.md`。範囲/成果物/受入基準/リスクを明記）。
@@ -45,7 +45,7 @@
 
 ## AIエージェント利用時の注意
 - 作業・質問・成果物は原則日本語。
-- ヒアリングは一問一答で進め、推測で要件を埋めない。
+- ヒアリングは要件定義フェーズのみ一問一答で進め、推測で要件を埋めない（合意済み事項は再質問しない）。
 - 既存の疎結合・低ロックイン設計に反する提案をする場合は代替案と移行コストを明示。
 
 ## コントリビューションの流れ（例）
