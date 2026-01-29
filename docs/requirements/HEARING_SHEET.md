@@ -69,6 +69,9 @@
 | CMS選定（MicroCMS/Contentful/WordPress API等）※WPは公開APIのみ推奨 | TBD | Should |
 | 下書きプレビュー機能の必要性（ヘッドレスCMS時は実装コスト増） | TBD | Should |
 | 著者情報/監修の扱い（E-E-A-T） | TBD | Should |
+| お問い合わせ送信データの保存方法（保存しない/DB/SaaS/CMS/その他） | TBD | Must |
+| 保存先の候補（DB: Neon/Supabase 等、CMS: Storyblok/Contentful/microCMS 等） | TBD | Should |
+| 保存に必要なキー/認証情報は準備できるか（用意できれば `.env.tmp` に記録） | TBD | Should |
 
 ---
 
@@ -125,6 +128,7 @@
 | ブランチ→環境デプロイ方針 | TBD | Must |
 | メール送信プロバイダ（SendGrid/AWS SES/Gmail等） | TBD | Should |
 | ログ閲覧方法（管理画面/外部） | TBD | Must |
+| サービス監視を行うか（行う場合のツール/範囲/アラート方針） | TBD | Should |
 
 ---
 
@@ -138,6 +142,9 @@
 | ソースコードのバックアップ運用（GitHub障害対策） | TBD | Should |
 | 監視（必要度） | TBD | Could |
 | E2Eテスト（重要導線の自動化）の要否 | TBD | Should |
+| バックアップを行わない場合のリスク認識と合意 | TBD | Must |
+| バックアップ/監視を行う場合のコスト・体制の合意 | TBD | Must |
+| 無料/OSSベースでの監視・バックアップ案（例: OSSエージェント + GitHub/クラウドへのスナップショット）を採用してよいか | TBD | Should |
 
 
 ---
