@@ -29,7 +29,7 @@
 ## 開発・運用方針（抜粋）
 - 環境: `dev / staging / production` を環境変数で切替。ブランチ例: `dev`→dev, `staging`→staging, `main`→prod。
 - コンテナ: Docker Compose で開発・テストを完結させる想定。初期ポートは衝突しにくい帯域（例: 43000番台）から選び、設定で変更可能にする。
-- 環境変数: `.env*` はテンプレのみコミット可。必須キーは起動時に検証して fail fast。
+- 環境変数: リポジトリ直下の `.env` はコンテナ用（テンプレ `.env.example` をコミット）。Next.js の実行時キーは `frontend/.env.local` に集約し、テンプレ `frontend/.env.local.example` をコミットする。秘密はどちらも本番値をコミットしない。必須キーは起動時に検証して fail fast。
 - 低ロックイン: データ層は Postgres 想定、ストレージは S3 互換抽象、認証や監視は差し替え可能な境界を設計。
 
 ## 品質ゲート（最小必須）

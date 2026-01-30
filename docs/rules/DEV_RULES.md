@@ -47,6 +47,7 @@
 - `env.example` を用意し、必須キー/意味/例を記載する
 - 実行時に必須環境変数が無ければ起動時に落とす（fail fast）
 - コンテナ関連の環境変数は `docker-compose.yml` へ直書きせず、リポジトリ直下の `.env` から参照する（テンプレは `.env.example`）
+- Next.js 実行時の環境変数は `frontend/.env.local` に集約し、テンプレとして `frontend/.env.local.example` をコミットする（`.env.local*` はコミット禁止）。本番/Preview もこのキー名に合わせて設定する。
 - ヒアリングで受け取ったAPIキーやトークンは `.env.tmp`（Git管理外）に一次保存し、鍵そのものをドキュメント/Issueに記載しない。未取得のキーはTBDとして残し、実装開始前に再確認する。
 
 ---
