@@ -96,9 +96,15 @@
 | 質問 | 回答 | 重要度 |
 |---|---|---|
 | 主要キーワード/テーマ | TBD | Should |
+| **サイトタイトル（title）**<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD<br>（30文字前後推奨） | Must |
+| **サイト説明文（description）**<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD<br>（PC120文字/スマホ50文字程度推奨） | Must |
+| **ファビコン / Apple Touch Icon**<br>※画像素材の手配状況<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD | Must |
+| **OGP画像**<br>※SNSシェア用画像の手配状況<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD | Should |
 | 記事運用（MDX前提で良いか） | TBD | Could |
 | 構造化データ（Organization等） | TBD | Should |
 | Search Console / GA4 導入 | TBD | Should |
+
+※メタ情報（title/description等）は、原則として環境変数（`.env` 等）で管理し、コードへのハードコードは避ける方針とします。
 
 ---
 

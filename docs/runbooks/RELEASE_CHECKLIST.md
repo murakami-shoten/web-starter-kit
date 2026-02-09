@@ -27,7 +27,27 @@
 
 ---
 
-## 4. デプロイ後
+## 4. ルール適合チェック（Source Code Review）
+
+**実装が規定通りに行われているか、ソースコードレベルで確認すること。**
+
+### 4.1 SEO/メタ情報（SEO_RULES, REQUIREMENTS）
+- [ ] `title` / `description` がコードにハードコードされていないこと（環境変数 `NEXT_PUBLIC_SITE_TITLE` 等を使用）
+- [ ] `favicon` / `apple-touch-icon` / `OGP画像` が実ファイルとして存在し、正しく参照されていること
+- [ ] `sitemap.xml` / `robots.txt` が生成されている（または生成ロジックがある）こと
+
+### 4.2 セキュリティ/品質（SECURITY_RULES, DEV_RULES）
+- [ ] フォームにバリデーション、レート制限、スパム対策（reCAPTCHA等）が入っていること
+- [ ] `any` 型が乱用されていないこと（`eslint-disable` が多用されていないこと）
+- [ ] 外部API呼び出しのキーがハードコードされていないこと
+
+### 4.3 構成/保守性（DEV_RULES, ARCHITECTURE_RULES）
+- [ ] Next.js アプリコードが `frontend/` 配下に収まっていること
+- [ ] コンポーネントが役割（ui/domain/features）ごとに整理されていること
+
+---
+
+## 5. デプロイ後
 
 - 主要ページが 200 を返す
 - 主要導線（問い合わせフォームなど）が動く

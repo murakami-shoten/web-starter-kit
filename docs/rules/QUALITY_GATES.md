@@ -39,6 +39,7 @@
 - 例外（スキップ）は禁止。どうしても必要なら「理由・期限・代替策」を記録する
 - staging/prod デプロイ前は必須ゲートを全通過
 - 重大インシデントは `docs/runbooks/INCIDENT_CHECKLIST.md` を追加して運用する
+- 実装完了後は `RELEASE_CHECKLIST.md` の「ルール適合チェック」を用いて、ソースコードが規約（SEO/Security/Architecture）に沿っているか最終確認する
 
 ---
 

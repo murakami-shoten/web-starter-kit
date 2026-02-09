@@ -26,6 +26,7 @@
 
 ### 2.2 メタ情報
 - title / description を全ページに定義
+- **原則として `title` / `description` などのテキスト情報は環境変数（例: `.env` → `NEXT_PUBLIC_SITE_TITLE`）で管理し、コードへのハードコードを避ける**
 - canonical を一貫して設定（URL正規化）
 - OGP/Twitter Card も標準実装（SNS運用を想定）
 
