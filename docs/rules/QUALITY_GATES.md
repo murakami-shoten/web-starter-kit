@@ -40,6 +40,8 @@
 - staging/prod デプロイ前は必須ゲートを全通過
 - 重大インシデントは `docs/runbooks/INCIDENT_CHECKLIST.md` を追加して運用する
 - 実装完了後は `RELEASE_CHECKLIST.md` の「ルール適合チェック」を用いて、ソースコードが規約（SEO/Security/Architecture）に沿っているか最終確認する
+- **品質証明**: すべてのゲートを通過した後、`docs/requirements/QUALITY_REPORT_TEMPLATE.md` に基づいた品質レポートを作成し、エビデンスとして保存する。
+
 
 ---
 
