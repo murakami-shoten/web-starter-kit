@@ -134,7 +134,7 @@
 
 | 質問 | 回答 | 重要度 |
 |---|---|---|
-| デプロイ先候補（Vercel/Render等） | TBD | Should |
+| デプロイ先候補（Vercel/Render等）<br>※Render Free PlanはSMTP不可のため、メール送信が必要ならVercel推奨 | TBD | Should |
 | 環境（dev/staging/prod） | TBD | Must |
 | ブランチ→環境デプロイ方針 | TBD | Must |
 | メール送信プロバイダ（SendGrid/AWS SES/Gmail等） | TBD | Should |
