@@ -9,6 +9,7 @@
 - 要件（REQUIREMENTS.md）に対して実装範囲が一致している
 - セキュリティ要件（SECURITY_RULES）に影響が無い/あるなら説明できる
 - SEO要件（SEO_RULES）に影響が無い/あるなら説明できる
+- LLMO要件（LLMO_RULES）に影響が無い/あるなら説明できる
 
 ---
 
@@ -36,6 +37,11 @@
 - [ ] `favicon` / `apple-touch-icon` / `OGP画像` が実ファイルとして存在し、正しく参照されていること
 - [ ] `sitemap.xml` / `robots.txt` が生成されている（または生成ロジックがある）こと
 
+### 4.1.1 LLMO（LLMO_RULES）
+- [ ] `/llms.txt` が設置されていること（`public/llms.txt` または Route Handler による動的生成）
+- [ ] `llms.txt` の内容が構造化データ（Organization 等）および SEO メタ情報と整合していること
+- [ ] `llms.txt` 内のリンク先が全て 200 を返すこと
+
 ### 4.2 セキュリティ/品質（SECURITY_RULES, DEV_RULES）
 - [ ] フォームにバリデーション、レート制限、スパム対策（reCAPTCHA等）が入っていること
 - [ ] `any` 型が乱用されていないこと（`eslint-disable` が多用されていないこと）
@@ -51,8 +57,8 @@
 
 - 主要ページが 200 を返す
 - 主要導線（問い合わせフォームなど）が動く
-- 主要導線（問い合わせフォームなど）が動く
 - sitemap/robots が取得できる
+- `/llms.txt` が取得できる（200 を返す）
 
 ## 6. ドキュメント整備 (Documentation)
 

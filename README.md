@@ -39,8 +39,9 @@
 
 推奨（将来必須化想定）: Lighthouse CI, Pa11y CI, OWASP ZAP Baseline（DAST）, Playwright E2E。
 
-## SEO / セキュリティ標準
+## SEO / LLMO / セキュリティ標準
 - SEO: `robots.txt` / `sitemap.xml` / 全ページの title・description・canonical・OGP/Twitter Card・必須構造化データ（Organization, WebSite, Breadcrumb）。
+- LLMO: `llms.txt` によるLLM向けサイト情報の構造化提供（`docs/rules/LLMO_RULES.md` 参照）。
 - セキュリティ: CSP を基本に、HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy など主要ヘッダーを標準適用。フォームは入力検証・CSRF/スパム対策・レート制限を設計に含める。
 
 ## AIエージェント利用時の注意
