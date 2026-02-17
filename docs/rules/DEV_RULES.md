@@ -57,7 +57,7 @@
 - Docker Compose で dev/test を起動できること
 - ホストにNode/npmが無くても `docker compose up` で動くこと
 - ポートは衝突を避ける（例: 43100〜43200帯など）＋変更可能にする
-- npm/node関連コマンド（install/run/lint/test/build）はホストで直接叩かず、必ず `docker compose run --rm <service>` などコンテナ経由で実行する。ホスト実行を前提にした手順やスクリプトを禁止する。
+- npm/node関連コマンド（install/run/lint/test/build/npx）はホストで直接叩かず、必ず `docker compose run --rm <service>` などコンテナ経由で実行する。ホスト実行を前提にした手順やスクリプトを禁止する。
 - コンテナのライフサイクル操作も docker compose に統一する（`up -d` / `stop` / `down` / `logs` / `ps` / `exec` 等）。`docker run` 直叩きや compose を経由しない運用を前提にしない。
 
 ---
