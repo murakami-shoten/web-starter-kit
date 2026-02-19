@@ -37,7 +37,7 @@
 - Secret scan（例: gitleaks）
 - Dependency vulnerability scan（例: OSV-Scanner）
 
-推奨（将来必須化想定）: Lighthouse CI, Pa11y CI, OWASP ZAP Baseline（DAST）, Playwright E2E。
+推奨（将来必須化想定）: Lighthouse CI, Pa11y CI, OWASP ZAP Baseline（DAST）, Playwright E2E, CSS Bundle Size チェック（詳細は `docs/rules/PERFORMANCE_RULES.md`）。
 
 ## SEO / LLMO / セキュリティ標準
 - SEO: `robots.txt` / `sitemap.xml` / 全ページの title・description・canonical・OGP/Twitter Card・必須構造化データ（Organization, WebSite, Breadcrumb）。

@@ -70,6 +70,12 @@
 - ロックイン度が高いBaaS/SDKを入れる場合は、抽象化レイヤを設ける
 - セキュリティ/品質ツールはOSS優先（詳細は QUALITY_GATES）
 
+### フォントパッケージ
+
+- CJK（日本語・中国語・韓国語）フォントを使う場合は `@fontsource-variable/*` パッケージを使用し、`next/font/google` は使わない（理由: PERFORMANCE_RULES 参照）
+- ラテン文字フォント（Inter, Manrope 等）は `next/font/google` で問題ない
+- フォント追加時は必ずビルド後の CSS チャンクサイズを確認する
+
 ---
 
 ## 7. ドキュメント運用

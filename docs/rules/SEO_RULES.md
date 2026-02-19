@@ -37,6 +37,11 @@
 ### 2.4 Core Web Vitals
 - LCP/CLS/INP を意識した実装（画像最適化、不要JS削減など）
 - 速度計測を品質ゲートに入れる（QUALITY_GATES参照）
+- **render-blocking リソースの管理**: CSS チャンクの合計サイズを監視し、特にフォント CSS が肥大化していないか確認する
+- **フォント最適化**: CJK フォント使用時は PERFORMANCE_RULES を参照し、`next/font/google` を直接使用しない
+- **PageSpeed Insights（モバイル）目標**:
+  - Performance 70+ を目標（CJK フォントの構造的制約により 90+ は困難）
+  - Accessibility 90+ / Best Practices 100 / SEO 100 は必達
 
 ---
 

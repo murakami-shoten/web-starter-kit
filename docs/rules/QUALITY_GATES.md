@@ -31,6 +31,7 @@
 | Performance（Lighthouse CI） | CWV/UX | 主要URLを計測 |
 | Accessibility（Pa11y CI） | WCAGベース | 主要URL or sitemap 対象 |
 | E2E Testing（例:Playwright） | 重要フローの疎通 | staging/prod デプロイ前 |
+| CSS Bundle Size | render-blocking CSS の肥大化防止 | PERFORMANCE_RULES §3 参照 |
 
 ---
 
