@@ -43,6 +43,15 @@
   - Performance 70+ を目標（CJK フォントの構造的制約により 90+ は困難）
   - Accessibility 90+ / Best Practices 100 / SEO 100 は必達
 
+### 2.5 エラーページ（カスタム404）
+- **`app/not-found.tsx` を必ず作成**し、デフォルトの Next.js 404 ページを置き換える
+- 要件:
+  - サイト共通のナビゲーション（Header / Footer）を含め、他ページと一貫した外観にする
+  - トップページ等への導線（リンク）を設置し、ユーザーがサイト内に留まれるようにする
+  - 404 ステータスコードが正しく返されること
+- 根拠: Google Search Central はカスタム404ページで「サイトの他の部分と一貫した外観」と「有用なリンク」の提供を推奨
+- 期待効果: 直帰率の改善、クローラビリティの維持
+
 ---
 
 ## 3. E-E-A-T寄り（信頼性・法務）
@@ -68,6 +77,10 @@
 - Google Search Central: sitemaps / robots の基本  
   https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview
   https://developers.google.com/search/docs/crawling-indexing/robots/intro
+- Google Search Central: カスタム404ページ  
+  https://developers.google.com/search/docs/crawling-indexing/custom-404-page
 - Next.js: Metadata / sitemap / robots  
   https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
   https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots
+- Next.js: not-found.tsx  
+  https://nextjs.org/docs/app/api-reference/file-conventions/not-found

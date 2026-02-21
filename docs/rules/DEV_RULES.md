@@ -83,3 +83,31 @@
 - 「ルール」は `docs/rules/` に集約（ここが真実）
 - 「要件」は `docs/requirements/` に集約（実装の起点）
 - 実装開始前に必ず要件の合意を取る（AGENTS.md参照）
+
+---
+
+## 8. App Router 既知課題と対策
+
+### 8.1 ページ遷移時のスクロールリセット
+
+Next.js App Router の `scrollRestoration` はブラウザ依存で不安定であり、ページ遷移後にスクロール位置が中途半端な位置に残ることがある（ヒーローやタイトルが見切れる）。
+
+**対策**: `usePathname` + `window.scrollTo(0, 0)` で遷移時にページトップへリセットする。これは Next.js コミュニティで広く採用されているパターン。
+
+```tsx
+"use client";
+
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+
+export function useScrollToTopOnNavigate() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+}
+```
+
+- この Hook をレイアウトまたは既存の Client Component（例: スクロールトップボタン）に組み込む
+- `usePathname` は軽量な Hook であり、パフォーマンスへの影響は無視できる

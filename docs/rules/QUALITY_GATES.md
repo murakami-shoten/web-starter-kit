@@ -88,6 +88,53 @@ done
 
 ---
 
+## 7. 推奨E2Eテストケース（テンプレート）
+
+E2E テスト（Playwright）で以下の観点を標準的にカバーすることを推奨する。テスト内のテキストやページパスはプロジェクトに合わせて調整すること。
+
+### 7.1 カスタム404ページの検証
+
+```typescript
+// e2e/not-found.spec.ts
+import { test, expect } from "@playwright/test";
+
+test("カスタム404ページが正しく表示される", async ({ page }) => {
+  const res = await page.goto("/this-page-does-not-exist");
+  // 404 ステータスコードの確認
+  expect(res?.status()).toBe(404);
+  // サイト共通ナビゲーションの表示確認
+  await expect(page.getByRole("navigation")).toBeVisible();
+  // トップページへの導線リンクの確認
+  const homeLink = page.getByRole("link", { name: /トップ|ホーム|home/i });
+  await expect(homeLink).toBeVisible();
+});
+```
+
+### 7.2 ページ遷移時のスクロールリセット
+
+```typescript
+// e2e/scroll-reset.spec.ts
+import { test, expect } from "@playwright/test";
+
+test("ページ遷移時にスクロール位置がトップにリセットされる", async ({ page }) => {
+  await page.goto("/");  // 任意の開始ページ
+  await page.waitForLoadState("networkidle");
+  // スクロール位置を強制的に下げる
+  await page.evaluate(() => {
+    document.documentElement.style.minHeight = "5000px";
+    window.scrollTo(0, 1000);
+  });
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+  // ナビゲーションリンクで別ページに遷移
+  await page.getByRole("navigation").getByRole("link").first().click();
+  await page.waitForLoadState("networkidle");
+  // スクロール位置が 0 にリセットされること
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+});
+```
+
+---
+
 ## 付録：ツール参照
 
 - gitleaks: https://github.com/gitleaks/gitleaks
@@ -96,4 +143,3 @@ done
 - Lighthouse CI: https://github.com/GoogleChrome/lighthouse-ci
 - pa11y-ci: https://github.com/pa11y/pa11y-ci
 - Playwright: https://playwright.dev/
-

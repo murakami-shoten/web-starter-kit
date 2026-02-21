@@ -22,6 +22,23 @@
 - Permissions-Policy
 - (必要に応じて) Cross-Origin-* 系
 
+### 2.1 Next.js 固有の必須設定
+
+- `next.config.mjs` に **`poweredByHeader: false`** を設定する（必須）
+  - Next.js はデフォルトで `X-Powered-By: Next.js` レスポンスヘッダーを付与し、フレームワーク情報が露出する
+  - OWASP Secure Headers Project で `X-Powered-By` の削除が推奨されている
+  - Next.js 公式ドキュメントでも推奨設定として記載
+
+```js
+// next.config.mjs
+const nextConfig = {
+  poweredByHeader: false,  // セキュリティ: X-Powered-By ヘッダーを無効化
+  // ...
+};
+```
+
+> **注意**: 技術スタックの隠蔽だけをセキュリティ対策としないこと。Wappalyzer 等のツールは JS バンドルや HTML 構造からも技術スタックを検出可能。本質的な対策（依存性更新、脆弱性スキャン、CSP 等）を優先する。
+
 ---
 
 ## 3. CSP（Next.js）
@@ -68,10 +85,14 @@
 
 - OWASP ASVS（チェックリストの物差し）  
   https://owasp.org/www-project-application-security-verification-standard/
+- OWASP Secure Headers Project  
+  https://owasp.org/www-project-secure-headers/
 - Next.js: Security Headers / Custom Headers  
   https://nextjs.org/docs/app/api-reference/next-config-js/headers
 - Next.js: Content Security Policy（CSP）ガイド  
   https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy
+- Next.js: poweredByHeader 設定  
+  https://nextjs.org/docs/app/api-reference/config/next-config-js/poweredByHeader
 - Secret scan: gitleaks  
   https://github.com/gitleaks/gitleaks
 - Dependency vuln scan: OSV-Scanner  
