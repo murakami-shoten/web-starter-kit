@@ -61,6 +61,7 @@
 | お問い合わせ | TBD | TBD | Must |
 | プライバシーポリシー | TBD | TBD | Must |
 | 免責/特商法（必要なら） | TBD | TBD | Could |
+| イントロアニメーション / 初回訪問演出 | TBD | TBD | Could |
 
 ---
 
@@ -93,18 +94,22 @@
 
 ## 5. SEO要件（技術+運用）
 
-| 質問 | 回答 | 重要度 |
-|---|---|---|
-| 主要キーワード/テーマ | TBD | Should |
-| **サイトタイトル（title）**<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD<br>（30文字前後推奨） | Must |
-| **サイト説明文（description）**<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD<br>（PC120文字/スマホ50文字程度推奨） | Must |
-| **ファビコン / Apple Touch Icon**<br>※画像素材の手配状況<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD | Must |
-| **OGP画像**<br>※SNSシェア用画像の手配状況<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD | Should |
-| 記事運用（MDX前提で良いか） | TBD | Could |
-| 構造化データ（Organization等） | TBD | Should |
-| Search Console / GA4 導入 | TBD | Should |
+| 質問 | 回答 | 重要度 | 決定タイミング |
+|---|---|---|---|
+| 主要キーワード/テーマ | TBD | Should | 要件定義時 |
+| **サイトタイトル（title）**<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD<br>（30文字前後推奨） | Must | リリース前 |
+| **サイト説明文（description）**<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD<br>（PC120文字/スマホ50文字程度推奨） | Must | リリース前 |
+| **ファビコン / Apple Touch Icon**<br>※画像素材の手配状況<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD | Must | リリース前 |
+| **OGP画像**<br>※SNSシェア用画像の手配状況<br>※未定の場合は「リリースまでのTODO（リリース準備SOW）」とする | TBD | Should | リリース前 |
+| 記事運用（MDX前提で良いか） | TBD | Could | 要件定義時 |
+| 構造化データ（Organization等） | TBD | Should | 実装前 |
+| Search Console / GA4 導入 | TBD | Should | 実装前 |
+| GTM（Google Tag Manager）の利用 ※GA4はGTM経由を推奨 | TBD | Must | 実装前 |
+| Consent Mode v2 の初期値方針（denied / granted）※§6 クッキー同意と連動 | TBD | Must | 実装前 |
+| LLMO（LLM最適化）の要否（`llms.txt` 配置等）※詳細は `LLMO_RULES.md` 参照 | TBD | Could | リリース前 |
 
 ※メタ情報（title/description等）は、原則として環境変数（`.env` 等）で管理し、コードへのハードコードは避ける方針とします。
+※Search Console / GA4 はコーポレートサイトでは Must 推奨。プロジェクト種別に応じて重要度を調整すること。
 
 ---
 
@@ -132,32 +137,49 @@
 
 ## 8. 運用・デプロイ
 
-| 質問 | 回答 | 重要度 |
-|---|---|---|
-| デプロイ先候補（Vercel/Render等）<br>※Render Free PlanはSMTP不可のため、メール送信が必要ならVercel推奨 | TBD | Should |
-| 環境（dev/staging/prod） | TBD | Must |
-| ブランチ→環境デプロイ方針 | TBD | Must |
-| メール送信プロバイダ（SendGrid/AWS SES/Gmail等） | TBD | Should |
-| ログ閲覧方法（管理画面/外部） | TBD | Must |
-| サービス監視を行うか（行う場合のツール/範囲/アラート方針） | TBD | Should |
+| 質問 | 回答 | 重要度 | 決定タイミング |
+|---|---|---|---|
+| 独自ドメインの取得状況と候補 | TBD | Must | リリース2週間前 |
+| www → apex（またはその逆）のリダイレクト方針 | TBD | Should | リリース前 |
+| SSL証明書の取得方針（デプロイ先の自動発行 / 手動） | TBD | Should | リリース前 |
+| デプロイ先候補（Vercel/Render等）<br>※Render Free PlanはSMTP不可のため、メール送信が必要ならVercel推奨 | TBD | Should | 要件定義時 |
+| 環境（dev/staging/prod） | TBD | Must | 要件定義時 |
+| ブランチ→環境デプロイ方針 | TBD | Must | 要件定義時 |
+| メール送信プロバイダ（SendGrid/AWS SES/Gmail等） | TBD | Should | 実装前 |
+| ログ閲覧方法（管理画面/外部） | TBD | Must | 実装前 |
+| サービス監視を行うか（行う場合のツール/範囲/アラート方針） | TBD | Should | 実装前 |
+| ステージング環境のアクセス制限方針（Basic認証推奨） | TBD | Should | 実装前 |
+
+※ドメインはDNS伝播に時間がかかるため、早期に確認すること。wwwリダイレクト方針はSEO（canonical URL）に影響する。
+※ステージング保護について: デプロイ先の保護機能（例: Vercel Deployment Protection）は仕様が不透明な場合があるため、アプリ側でのBasic認証との併用または代替を検討すること。
 
 ---
 
 ## 9. 非機能要件
 
-| 質問 | 回答 | 重要度 |
-|---|---|---|
-| パフォーマンス目標（CWVなど） | TBD | Should |
-| CDN利用の意向（利用/不要/TBD）と前提（無料希望/有料可、静的のみ/HTML含む） | TBD | Should |
-| CDN決定の期限（例: リリース前 / リリース後○週以内 / TBD） | TBD | Could |
-| 可用性（ダウン許容） | TBD | Could |
-| バックアップ/復旧方針（CMS/外部サービス上のデータ含む） | TBD | Should |
-| ソースコードのバックアップ運用（GitHub障害対策） | TBD | Should |
-| 監視（必要度） | TBD | Could |
-| E2Eテスト（重要導線の自動化）の要否 | TBD | Should |
-| バックアップを行わない場合のリスク認識と合意 | TBD | Must |
-| バックアップ/監視を行う場合のコスト・体制の合意 | TBD | Must |
-| 無料/OSSベースでの監視・バックアップ案（例: OSSエージェント + GitHub/クラウドへのスナップショット）を採用してよいか | TBD | Should |
+| 質問 | 回答 | 重要度 | 決定タイミング |
+|---|---|---|---|
+| パフォーマンス目標（CWV） | TBD | Should | 要件定義時 |
+| CDN利用の意向（利用/不要/TBD）と前提（無料希望/有料可、静的のみ/HTML含む） | TBD | Should | 実装前 |
+| CDN決定の期限（例: リリース前 / リリース後○週以内 / TBD） | TBD | Could | 実装前 |
+| 可用性（ダウン許容） | TBD | Could | 要件定義時 |
+| バックアップ/復旧方針（CMS/外部サービス上のデータ含む） | TBD | Should | 実装前 |
+| ソースコードのバックアップ運用（GitHub障害対策） | TBD | Should | 実装前 |
+| 監視（必要度） | TBD | Could | リリース前 |
+| E2Eテスト（重要導線の自動化）の要否 | TBD | Should | 実装前 |
+| バックアップを行わない場合のリスク認識と合意 | TBD | Must | 要件定義時 |
+| バックアップ/監視を行う場合のコスト・体制の合意 | TBD | Must | 実装前 |
+| 無料/OSSベースでの監視・バックアップ案（例: OSSエージェント + GitHub/クラウドへのスナップショット）を採用してよいか | TBD | Should | 実装前 |
+
+※ Core Web Vitals の Google 公式閾値（参照: [web.dev/articles/vitals](https://web.dev/articles/vitals)）:
+
+| 指標 | Good | Needs Improvement | Poor |
+|---|---|---|---|
+| **LCP**（読み込み速度） | ≤ 2.5秒 | 2.5〜4.0秒 | > 4.0秒 |
+| **INP**（操作応答性） | ≤ 200ms | 200〜500ms | > 500ms |
+| **CLS**（視覚安定性） | ≤ 0.1 | 0.1〜0.25 | > 0.25 |
+
+※ 上記は75パーセンタイルで評価。推奨目標は CWV 3指標 Good 圏内。Lighthouse スコアは参考値として扱う。詳細な評価基準は `PERFORMANCE_RULES.md` を参照。
 
 
 ---
@@ -180,3 +202,6 @@
 | SEO | sitemap/robots/メタが整備 | Must |
 | セキュリティ | CSP/ヘッダーが有効 | Must |
 | a11y | 重大違反が無い（目標に応じて） | Should |
+| デプロイ後確認 | 全主要ページが200を返す / OGP表示確認 / フォーム送受信確認 | Must |
+| GTM/GA4 | イベント受信確認（page_view等） | Should |
+| CMP/Cookie同意 | 同意/拒否/設定の各パターン動作確認 | Should |

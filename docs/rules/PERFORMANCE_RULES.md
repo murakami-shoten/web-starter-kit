@@ -87,6 +87,34 @@ frontend/src/
 
 ---
 
+## 5. Core Web Vitals 目標と評価基準
+
+### 5.1 Google 公式閾値
+
+各指標はページ読み込みの **75パーセンタイル** で評価される（モバイル・デスクトップ別）。
+
+| 指標 | Good（SEOランキングに好影響） | Needs Improvement | Poor |
+|---|---|---|---|
+| **LCP**（Largest Contentful Paint） | ≤ 2.5秒 | 2.5〜4.0秒 | > 4.0秒 |
+| **INP**（Interaction to Next Paint） | ≤ 200ms | 200〜500ms | > 500ms |
+| **CLS**（Cumulative Layout Shift） | ≤ 0.1 | 0.1〜0.25 | > 0.25 |
+
+参照: [web.dev/articles/vitals](https://web.dev/articles/vitals)
+
+### 5.2 推奨目標
+
+- **CWV 3指標すべてが Good 圏内** に入ることを最優先目標とする
+- **Lighthouse Performance スコアは参考値** として扱い、スコア自体を目標にしない
+
+### 5.3 フレームワーク制約に関する注意
+
+- モバイルの Lighthouse Performance スコアは CWV の **Lab 計測値** であり、フィールドデータ（CrUX）とは乖離する場合がある
+- React / Next.js ランタイム（~220KB）のダウンロード・パースにより、**モバイル Performance 90+ の達成は現実的に困難** な場合がある
+- SSG / ISR を積極活用し、Client Component の JavaScript を最小限に抑えることで改善可能
+- `dynamic(() => import(...))` による動的インポートで、初期ロードに不要なコンポーネントを遅延読み込みする
+
+---
+
 ## 付録：参考リファレンス
 
 - web.dev: Optimize WebFont loading

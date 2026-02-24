@@ -111,3 +111,53 @@ export function useScrollToTopOnNavigate() {
 
 - この Hook をレイアウトまたは既存の Client Component（例: スクロールトップボタン）に組み込む
 - `usePathname` は軽量な Hook であり、パフォーマンスへの影響は無視できる
+
+---
+
+## 9. CMS連携の実装注意事項
+
+### 9.1 キャッシュ戦略の選択指針
+
+ヘッドレスCMS（Storyblok / Contentful / microCMS 等）と連携するページでは、コンテンツの更新頻度と即時反映の要否に応じてキャッシュ戦略を選択する。
+
+| 戦略 | ユースケース | 特徴 |
+|---|---|---|
+| **ISR**（`revalidate: N`） | ニュース一覧・ブログ記事等、数分〜数時間の遅延が許容されるページ | ビルド不要でCDNキャッシュを更新。パフォーマンスと鮮度のバランスが良い |
+| **SSR**（`force-dynamic`） | プレビュー・下書き確認・リアルタイム反映が必要なページ | リクエストごとにCMSを取得。Webhook連動で `revalidateTag` / `revalidatePath` を使う場合はISR + On-Demand Revalidation が推奨 |
+| **Static**（ビルド時生成） | 会社概要・プライバシーポリシー等、めったに更新しないページ | 最速だが更新時に再ビルドが必要 |
+
+- デフォルトは **ISR**（`revalidate: 60` 等）を推奨。要件に応じて調整する
+- `force-dynamic` の多用はサーバー負荷とレスポンス速度に影響するため、必要なページにのみ限定する
+
+### 9.2 `.next` ディレクトリ競合対策（distDir 分離）
+
+開発サーバーと E2E テストコンテナが同時に `.next` ディレクトリを使用すると、ビルドキャッシュの競合やファイルロックが発生する。
+
+**対策**: E2E テスト用コンテナの `next.config.mjs` で `distDir` を分離する。
+
+```js
+// 例: e2e 用設定（環境変数で切替）
+const nextConfig = {
+  distDir: process.env.NEXT_DIST_DIR || '.next',
+  // ...
+};
+```
+
+- `docker-compose.yml` の E2E サービスで `NEXT_DIST_DIR=.next-e2e` を設定
+- ボリュームマウント時に `.next` と `.next-e2e` が干渉しないよう注意
+
+### 9.3 CMSプレビュー時の HTTPS 要件
+
+ヘッドレスCMS の Webhook やプレビュー機能は **HTTPS エンドポイントを前提** とすることが多い（Storyblok のビジュアルエディタ等）。
+
+**ローカル開発での対策**:
+- `ngrok` や `cloudflared` 等のトンネルツールを使用して、ローカルの開発サーバーを一時的にHTTPSで公開する
+- トンネルURLをCMS側のプレビューURLに設定する
+- トンネルツールの無料プランでは URL が毎回変わる場合があるため、CMS側の設定更新手順をチームで共有すること
+
+```bash
+# 例: ngrok でローカル 43000 番ポートを公開
+ngrok http 43000
+```
+
+- 本番・ステージングはデプロイ先が HTTPS を提供するため、この対策はローカル開発環境のみで必要
