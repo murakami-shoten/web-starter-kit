@@ -15,7 +15,7 @@
 
 ## 2. 必須ゲート（QUALITY_GATES）
 
-- lint / typecheck / test / build
+- lint / typecheck / format:check / test / build
 - secret scan / dependency vuln scan
 
 ---

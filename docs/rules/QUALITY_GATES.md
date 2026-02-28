@@ -12,14 +12,15 @@
 
 ## 2. 必須ゲート（最小）
 
-| ゲート | 目的 | 失敗時の扱い |
-|---|---|---|
-| Lint | コード規約 | ブロック |
-| Typecheck | 型安全 | ブロック |
-| Unit/Integration test | 回帰防止 | ブロック |
-| Build | 本番ビルド成立 | ブロック |
-| Secret scan（例:gitleaks） | 鍵漏洩防止 | ブロック |
-| Dependency vuln scan（例:OSV） | 既知脆弱性検出 | 原則ブロック（例外は期限付きで許可） |
+| ゲート | 目的 | 実行コマンド | 失敗時の扱い |
+|---|---|---|---|
+| Lint | コード規約（`core-web-vitals` 含む） | `npm run lint` | ブロック |
+| Typecheck | 型安全 | `npm run typecheck` | ブロック |
+| Format check | コードフォーマット統一（Prettier） | `npm run format:check` | ブロック |
+| Unit/Integration test | 回帰防止 | `npm test` | ブロック |
+| Build | 本番ビルド成立 | `npm run build` | ブロック |
+| Secret scan（例:gitleaks） | 鍵漏洩防止 | `docker compose run --rm gitleaks` | ブロック |
+| Dependency vuln scan（例:OSV） | 既知脆弱性検出 | `docker compose run --rm osv-scanner` | 原則ブロック（例外は期限付きで許可） |
 
 ---
 

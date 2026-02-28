@@ -19,14 +19,64 @@
 - `any` は原則禁止（どうしても必要なら理由をコメントで残す）
 - 型の境界は外部I/O（環境変数、HTTP、DB、外部API）で明確にする
 
-### 2.2 命名/構造
+### 2.2 ESLint
+- `eslint-config-next/core-web-vitals`（Core Web Vitals ルール含む）を使用する
+- Prettier との競合を防止するため `eslint-config-prettier` を併用する
+- `eslint.config.js`（Flat Config）の構成例:
+
+```javascript
+const nextConfig = require("eslint-config-next/core-web-vitals");
+const prettierConfig = require("eslint-config-prettier");
+
+module.exports = [
+  { ignores: [".next", ".next-dev", ".next-build", ".next-e2e", "node_modules"] },
+  ...nextConfig,
+  prettierConfig,
+];
+```
+
+### 2.3 命名/構造
 - 役割で分離する（UI / domain / infra / lib）
 - 「機能ごと」かつ「依存方向が一方向」になるように配置する
 - import は上位レイヤから下位レイヤへの依存のみ（逆は禁止）
 - 新規実装前に既存の共通関数・コンポーネント・ユーティリティ・ライブラリを確認し、再利用または共通化を優先する（重複実装＝車輪の再発明を避ける）
  - 共通化に伴う軽微〜中規模のリファクタは許容。API互換を壊す、広範な移動を伴う等の破壊的リファクタは実施前にユーザーの許可を得ること。
 
-### 2.3 ログ
+### 2.4 型チェック（TypeScript）
+- `tsc --noEmit` による型チェックを品質ゲートに含める（`npm run typecheck`）
+- ビルド（`next build`）でも型チェックは実行されるが、型チェック単体を高速に回す手段として `typecheck` script を独立して用意する
+
+### 2.5 フォーマット（Prettier）
+- Prettier でコードフォーマットを統一する（設定: `frontend/.prettierrc.json`）
+- `npm run format:check` を品質ゲートに含める（差分検知用）
+- 自動修正は `npm run format` で実行する
+- ESLint の書式系ルールは `eslint-config-prettier` で無効化し、フォーマットは Prettier に一元化する
+
+### 2.6 コード品質ツールの初期セットアップ（派生プロジェクト向け）
+
+派生プロジェクトの作成時、以下を必ず準備すること:
+
+**`package.json` scripts:**
+
+```json
+"typecheck": "tsc --noEmit",
+"format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css,json}'",
+"format:check": "prettier --check 'src/**/*.{ts,tsx,js,jsx,css,json}'"
+```
+
+**`devDependencies` に追加:**
+
+```
+prettier
+eslint-config-prettier
+```
+
+**設定ファイル:**
+
+- `frontend/.prettierrc.json` — Prettier の書式設定
+- `frontend/.prettierignore` — フォーマット対象外の指定
+
+### 2.7 ログ
 - ローカルはコンソール（開発体験を優先）
 - staging/prod はデプロイ先の管理画面ログで追える設計にする
 - 例外や失敗時は「原因」「入力（マスク）」「相関ID（あれば）」を含める
