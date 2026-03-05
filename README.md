@@ -23,6 +23,11 @@
 - `docs/rules/`: 開発・アーキテクチャ・SEO・セキュリティ・可観測性・可搬性・品質ゲート等の規約群。
 - `docs/runbooks/RELEASE_CHECKLIST.md`: リリース前チェックリスト。
 
+## 前提条件
+
+- Git
+- Docker Desktop（macOS / Windows WSL2）
+
 ## 利用開始（新規プロジェクトの作成）
 
 本リポジトリをテンプレートとして新規プロジェクトを開始する手順:
