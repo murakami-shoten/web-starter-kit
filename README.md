@@ -90,16 +90,14 @@ git commit -m "chore: init from web-starter-kit template"
 ## コントリビューションの流れ（例）
 - 要件定義を確定 → 小さなタスクに分解 → ブランチ作成 → 必須品質ゲートを通過 → PR/レビュー → `main/staging/dev` へマージ。
 
-## 今後の拡張
-- Next.js アプリ本体や Docker Compose 設定、各種 CI ワークフローを順次追加予定。追加時も本READMEと `AGENTS.md` を最新の一次情報として更新してください。
-- 保守運用体制テンプレートの整備（将来対応候補）:
+## 今後の拡張（本テンプレプロジェクトとして）
+- 保守運用体制テンプレートの整備:
   - 保守体制・責任分担表（RACI）テンプレート
   - 障害対応ランブック（インシデント対応・復旧手順）
   - SLA/SLO 定義テンプレート（稼働率目標・応答時間の合意書）
   - 定期運用チェックリスト（月次パッチ確認、バックアップ検証、SSL証明書更新等）
-- GitHub コミュニティスタンダード準拠テンプレートの整備（将来対応候補）:
+- GitHub コミュニティスタンダード準拠テンプレートの整備:
   - `CONTRIBUTING.md`（コントリビューションガイドライン）
   - `.github/ISSUE_TEMPLATE/`（Issue テンプレート）
   - `.github/PULL_REQUEST_TEMPLATE.md`（PR テンプレート）
   - `CODE_OF_CONDUCT.md`（行動規範）
-  - `LICENSE`（ライセンスファイル）
