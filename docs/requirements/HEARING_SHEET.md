@@ -184,7 +184,23 @@
 
 ---
 
-## 10. フロント検証環境（実ブラウザ確認）
+## 10. CI/CD・開発フロー自動化
+
+| 質問 | 回答 | 重要度 | 決定タイミング |
+|---|---|---|---|
+| 品質ゲートの実行環境（A: ローカルのみ / B: ローカル+CI / C: CIのみ） | TBD | Must | 実装前 |
+| Git hooks（pre-commit lint / commit-msg 検証）を導入するか | TBD | Should | 実装前 |
+| CI/CD（GitHub Actions 等）を導入するか（導入する場合のサービス名） | TBD | Should | 実装前 |
+| 依存更新の自動化（Renovate / Dependabot）を導入するか | TBD | Should | 実装前 |
+| 自動リリース（CHANGELOG 自動生成等）の要否 | TBD | Could | 実装前 |
+| GitHub コミュニティスタンダード準拠の要否（チーム開発・OSS公開の場合に推奨） | TBD | Should | 実装前 |
+
+※品質ゲート実行環境の詳細は `QUALITY_GATES.md` を参照。Git hooks / CI の推奨構成は `DEV_RULES.md` §3 を参照。
+※コミュニティスタンダード準拠時は `CONTRIBUTING.md`、Issue/PRテンプレート、`CODE_OF_CONDUCT.md`、`LICENSE` 等を整備する。
+
+---
+
+## 11. フロント検証環境（実ブラウザ確認）
 
 | 質問 | 回答 | 重要度 |
 |---|---|---|
@@ -194,7 +210,7 @@
 
 ---
 
-## 11. 受入基準（Doneの定義）
+## 12. 受入基準（Doneの定義）
 
 | 項目 | 基準 | 重要度 |
 |---|---|---|

@@ -83,11 +83,91 @@ eslint-config-prettier
 
 ---
 
-## 3. Git運用（推奨）
+## 3. Git運用（必須）
 
 - main / staging / dev を基本ブランチとして運用
 - PR（またはマージ）時点で品質ゲートを必ず通す
 - 変更は小さく、レビューしやすい単位でコミット
+
+### 3.1 コミットメッセージ（Conventional Commits 準拠）
+
+コミットメッセージは [Conventional Commits](https://www.conventionalcommits.org/) の規約に従うこと。AIエージェントも同一ルールに従う。
+
+**形式:**
+
+```
+<type>(<scope>): <subject>
+
+[body]
+
+[footer]
+```
+
+**type（必須・英語固定）:**
+
+| type | 用途 |
+|---|---|
+| `feat` | 新機能 |
+| `fix` | バグ修正 |
+| `docs` | ドキュメントのみの変更 |
+| `style` | コードの意味に影響しない変更（空白、フォーマット等） |
+| `refactor` | バグ修正でも機能追加でもないコード変更 |
+| `perf` | パフォーマンス改善 |
+| `test` | テストの追加・修正 |
+| `build` | ビルドシステムや外部依存の変更 |
+| `ci` | CI設定の変更 |
+| `chore` | 上記いずれにも当てはまらない雑務 |
+
+**scope（任意・英語推奨）:** 変更対象のコンポーネントや機能領域（例: `contact`, `seo`, `auth`, `docker`）
+
+**subject（必須・日本語許容）:** 変更内容の簡潔な説明。先頭を大文字にしない。末尾にピリオドを付けない。
+
+**Breaking Change:** `type` の後に `!` を付与するか、フッターに `BREAKING CHANGE:` を記載する。
+
+**例:**
+
+```bash
+feat(contact): お問い合わせフォームにバリデーション追加
+fix(seo): OGP画像のパス修正
+docs: ヒアリングシートに監視項目を追加
+refactor!: API認証ミドルウェアの構造を変更
+chore: init from web-starter-kit template
+```
+
+### 3.2 Git Hooks（推奨）
+
+品質ゲート（`QUALITY_GATES.md`）の一部をコミット時に自動実行し、問題を早期に検出する。全ゲートを hooks で実行するのではなく、**数秒で終わる軽量なチェックのみ**を対象とする。
+
+**推奨ツール構成:**
+
+| ツール | 役割 |
+|---|---|
+| [husky](https://typicode.github.io/husky/) | Git hooks の管理（`.husky/` に格納） |
+| [lint-staged](https://github.com/lint-staged/lint-staged) | 変更ファイルのみに lint / format を実行 |
+| [commitlint](https://commitlint.js.org/) | Conventional Commits のメッセージ検証 |
+
+**hooks で実行する推奨チェック:**
+
+| hook | 実行内容 | 所要時間目安 |
+|---|---|---|
+| `pre-commit` | lint-staged（lint + format:check、変更ファイルのみ） | 数秒 |
+| `commit-msg` | commitlint（メッセージ形式検証） | 1秒未満 |
+
+**hooks で実行しないもの（重すぎるため）:** typecheck / test / build / secret scan / 脆弱性 scan → これらはデプロイ前の品質ゲート全体実行 or CI で行う。
+
+> **Docker 前提との例外**: Git hooks は**ホスト側の Git が実行する**ため、hooks 内のコマンドはホスト環境に依存する。  
+> - ホストに Node.js がある場合: husky / lint-staged がそのまま動作する  
+> - ホストに Node.js がない場合: hooks 内で `docker compose run --rm frontend npx ...` を呼ぶか、hooks を無効化して CI に任せる（`QUALITY_GATES.md` の構成 C）
+
+### 3.3 CI/CD（プロジェクト判断）
+
+CI/CD を導入するかは `HEARING_SHEET.md` §10 でプロジェクトごとに合意する。導入する場合の指針:
+
+- **推奨サービス**: GitHub Actions（リポジトリと統合しやすく、無料枠あり）
+- **PR 時**: `QUALITY_GATES.md` §2 の必須ゲートを全項目自動実行する
+- **マージ時**: ブランチに応じた環境（dev / staging / prod）へのデプロイをトリガーする
+- **ワークフロー設計**: `QUALITY_GATES.md` のゲート定義に従い、将来の推奨ゲート追加にも対応しやすい構成にする
+- **Docker 利用**: CI 上でも `docker compose` 経由でゲートを実行し、ローカルとの一貫性を保つ
 
 ---
 

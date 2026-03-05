@@ -2,6 +2,10 @@
 
 このリポジトリは「あらゆるWebサイト構築」を素早く始められるテンプレート兼ベースプロジェクトです。要件定義から実装・テスト・保守計画までを一貫して進められる規範的なドキュメント群を備え、AIを活用した開発も、AIを使わないチーム開発も同じ手順で運用できます。
 
+## 対象ユーザー
+
+本プロジェクトは **Web開発・運用の基本的な流れを理解しているWeb制作者** を対象としています。具体的には、要件定義→設計→実装→テスト→デプロイ→保守のライフサイクルや、Git・Docker・CI/CDなどの基礎概念を把握していることを前提とします。Web開発未経験者向けのチュートリアルではありません。
+
 ## 特徴
 - 要件定義ファースト: ヒアリングシート→要件定義書→リスク明示の流れを標準化。
 - Next.js（App Router）+ TypeScript を前提とした設計指針を提供（コードはこれから追加する想定）。
@@ -10,7 +14,7 @@
 - AIエージェント利用時の運用ルールを明文化（日本語での逐次ヒアリング、一問一答）。
 
 ## リポジトリ構成
-- `AGENTS.md`: AIエージェント共通ガイド（一次ソース）。作業順序と不変条件を定義。
+- `AGENTS.md`: AIエージェント向け作業ルール・不変条件（一次ソース）。
 - `docs/requirements/`:
   - `HEARING_SHEET.md`: ヒアリング入力フォーム。
   - `REQUIREMENTS_TEMPLATE.md`: プロジェクト固有要件定義書のテンプレ（編集禁止）。
@@ -18,6 +22,27 @@
   - `projects/`: プロジェクト別の要件定義書保存場所。
 - `docs/rules/`: 開発・アーキテクチャ・SEO・セキュリティ・可観測性・可搬性・品質ゲート等の規約群。
 - `docs/runbooks/RELEASE_CHECKLIST.md`: リリース前チェックリスト。
+
+## 利用開始（新規プロジェクトの作成）
+
+本リポジトリをテンプレートとして新規プロジェクトを開始する手順:
+
+### 方法A: GitHub の「Use this template」（推奨）
+1. GitHub上で本リポジトリの「Use this template」→「Create a new repository」を選択
+2. 新リポジトリ名を入力して作成
+3. 作成されたリポジトリをローカルにクローン
+
+### 方法B: 手動クローン
+```bash
+git clone <web-starter-kit-url> <new-project-name>
+cd <new-project-name>
+rm -rf .git
+git init
+git add .
+git commit -m "chore: init from web-starter-kit template"
+```
+
+作成後、以下の「始め方（Definition of Ready）」に従って要件定義から進めてください。
 
 ## 始め方（Definition of Ready）
 1) `docs/requirements/HEARING_SHEET.md` を確認し、未記入項目をユーザーへ（要件定義フェーズに限り）一問一答でヒアリング。合意済みは以後再質問しない。
@@ -59,3 +84,14 @@
 
 ## 今後の拡張
 - Next.js アプリ本体や Docker Compose 設定、各種 CI ワークフローを順次追加予定。追加時も本READMEと `AGENTS.md` を最新の一次情報として更新してください。
+- 保守運用体制テンプレートの整備（将来対応候補）:
+  - 保守体制・責任分担表（RACI）テンプレート
+  - 障害対応ランブック（インシデント対応・復旧手順）
+  - SLA/SLO 定義テンプレート（稼働率目標・応答時間の合意書）
+  - 定期運用チェックリスト（月次パッチ確認、バックアップ検証、SSL証明書更新等）
+- GitHub コミュニティスタンダード準拠テンプレートの整備（将来対応候補）:
+  - `CONTRIBUTING.md`（コントリビューションガイドライン）
+  - `.github/ISSUE_TEMPLATE/`（Issue テンプレート）
+  - `.github/PULL_REQUEST_TEMPLATE.md`（PR テンプレート）
+  - `CODE_OF_CONDUCT.md`（行動規範）
+  - `LICENSE`（ライセンスファイル）
