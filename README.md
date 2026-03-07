@@ -1,5 +1,9 @@
 # Web Starter Kit
 
+[![License: MIT](https://img.shields.io/github/license/murakami-shoten/web-starter-kit)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/murakami-shoten/web-starter-kit)](https://github.com/murakami-shoten/web-starter-kit/stargazers)
+[![GitHub last commit](https://img.shields.io/github/last-commit/murakami-shoten/web-starter-kit)](https://github.com/murakami-shoten/web-starter-kit/commits/main)
+
 このリポジトリは「あらゆるWebサイト構築」を素早く始められるテンプレート兼ベースプロジェクトです。要件定義から実装・テスト・保守計画までを一貫して進められる規範的なドキュメント群を備え、AIを活用した開発も、AIを使わないチーム開発も同じ手順で運用できます。
 
 ## 対象ユーザー
