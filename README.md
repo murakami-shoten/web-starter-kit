@@ -60,6 +60,8 @@ git commit -m "chore: init from web-starter-kit template"
 4) 要件が合意できたら、フェーズごとに SOW を作成・合意（テンプレ: `docs/requirements/SOW_TEMPLATE.md` → 保存: `docs/requirements/projects/<project_slug>/SOW_<phase>.md`。範囲/成果物/受入基準/リスクを明記）。
 5) `docs/rules/QUALITY_GATES.md` を満たす見通しを立ててから実装開始。
 
+> **設計ドキュメントの方針**: 本プロジェクトでは詳細設計書を独立した成果物として作成しません。要件定義書（何を作るか）、ワイヤーフレーム/UIモック（どう見せるか＝画面レベルの詳細設計）、SOW（いつ・何を納品するか）の3点がその役割を担います。
+
 ## 開発・運用方針（抜粋）
 - 環境: `dev / staging / production` を環境変数で切替。ブランチ例: `dev`→dev, `staging`→staging, `main`→prod。
 - コンテナ: Docker Compose で開発・テストを完結させる想定。初期ポートは衝突しにくい帯域（例: 43000番台）から選び、設定で変更可能にする。
