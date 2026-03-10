@@ -17,7 +17,7 @@
 | Lint | コード規約（`core-web-vitals` 含む） | `npm run lint` | ブロック |
 | Typecheck | 型安全 | `npm run typecheck` | ブロック |
 | Format check | コードフォーマット統一（Prettier） | `npm run format:check` | ブロック |
-| Unit/Integration test | 回帰防止 | `npm test` | ブロック |
+| Unit/Integration test | 回帰防止 | `npm test`（対象: DEV_RULES §2.9 参照） | ブロック |
 | Build | 本番ビルド成立 | `npm run build` | ブロック |
 | Secret scan（例:gitleaks） | 鍵漏洩防止 | `docker compose run --rm gitleaks` | ブロック |
 | Dependency vuln scan（例:OSV） | 既知脆弱性検出 | `docker compose run --rm osv-scanner` | 原則ブロック（例外は期限付きで許可） |
