@@ -41,6 +41,23 @@ module.exports = [
 - import は上位レイヤから下位レイヤへの依存のみ（逆は禁止）
 - 新規実装前に既存の共通関数・コンポーネント・ユーティリティ・ライブラリを確認し、再利用または共通化を優先する（重複実装＝車輪の再発明を避ける）
  - 共通化に伴う軽微〜中規模のリファクタは許容。API互換を壊す、広範な移動を伴う等の破壊的リファクタは実施前にユーザーの許可を得ること。
+- **マジックナンバー（意味不明なリテラル数値）は禁止**。意図が明確な名前付き定数を定義し、JSDoc またはインラインコメントで単位・根拠を記述すること
+  - `0`, `1`, `-1` 等の自明な値、配列インデックス、テストコード内のアサーション値は例外とする
+
+  ```typescript
+  // ❌ Bad: 意味が不明
+  if (retryCount > 3) { ... }
+  setTimeout(callback, 60000);
+
+  // ✅ Good: 名前と単位が明確
+  /** リトライ上限（API rate limit を考慮し 3 回に制限） */
+  const MAX_RETRY_COUNT = 3;
+  /** ポーリング間隔（ミリ秒） */
+  const POLLING_INTERVAL_MS = 60_000;
+
+  if (retryCount > MAX_RETRY_COUNT) { ... }
+  setTimeout(callback, POLLING_INTERVAL_MS);
+  ```
 
 ### 2.4 型チェック（TypeScript）
 - `tsc --noEmit` による型チェックを品質ゲートに含める（`npm run typecheck`）
