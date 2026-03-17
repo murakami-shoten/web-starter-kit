@@ -78,6 +78,7 @@
 | お問い合わせ送信データの保存方法（保存しない/DB/SaaS/CMS/その他） | TBD | Must |
 | 保存先の候補（DB: Neon/Supabase 等、CMS: Storyblok/Contentful/microCMS 等） | TBD | Should |
 | 保存に必要なキー/認証情報は準備できるか（用意できれば `.env.tmp` に記録） | TBD | Should |
+| 問い合わせフォームからの自動返信メールの要否 | TBD | Should |
 
 ---
 
@@ -150,12 +151,17 @@
 | 環境（dev/staging/prod） | TBD | Must | 要件定義時 |
 | ブランチ→環境デプロイ方針 | TBD | Must | 要件定義時 |
 | メール送信プロバイダ（SendGrid/AWS SES/Gmail等） | TBD | Should | 実装前 |
+| 送信元メールアドレスの希望（例: `noreply@a.com`） | TBD | Should | 実装前 |
+| 独自ドメインのメールサーバー/メールアカウントの既存有無 | TBD | Must | 実装前 |
+| 独自ドメインのDNSレコード設定権限の有無 | TBD | Must | 実装前 |
+| DNS設定不可の場合、外部ドメイン（Gmail等）からの送信を許容するか | TBD | Should | 実装前 |
 | ログ閲覧方法（管理画面/外部） | TBD | Must | 実装前 |
 | サービス監視を行うか（行う場合のツール/範囲/アラート方針） | TBD | Should | 実装前 |
 | ステージング環境のアクセス制限方針（Basic認証推奨） | TBD | Should | 実装前 |
 
 ※ドメインはDNS伝播に時間がかかるため、早期に確認すること。wwwリダイレクト方針はSEO（canonical URL）に影響する。
 ※ステージング保護について: デプロイ先の保護機能（例: Vercel Deployment Protection）は仕様が不透明な場合があるため、アプリ側でのBasic認証との併用または代替を検討すること。
+※メール送信方式の選定（自ドメインSMTP / 外部サービス+DNS認証 / 外部アカウント直接送信）の詳細は `EMAIL_RULES.md §2` を参照。
 
 ---
 

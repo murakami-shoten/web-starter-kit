@@ -32,6 +32,8 @@
 - [ ] Google Search Console / Analytics のプロパティ作成
 - [ ] プライバシーポリシー / 利用規約の最終確認（法務確認含む）
 - [ ] メール送信プロバイダ（SendGrid等）の検証済みドメイン設定
+- [ ] DNS認証（SPF / DKIM / DMARC）レコードの設定確認（`EMAIL_RULES.md §3` 参照）
+- [ ] メール送信テスト（主要メールプロバイダで迷惑メールに振り分けられないことの確認）
 
 ## 3. 受入基準（Definition of Done）
 

@@ -31,6 +31,7 @@
 - SEO規約（Google推奨準拠）: `docs/rules/SEO_RULES.md`
 - LLMO規約（LLM最適化 / llms.txt）: `docs/rules/LLMO_RULES.md`
 - セキュリティ規約（CSP/ヘッダー/ASVS）: `docs/rules/SECURITY_RULES.md`
+- メール送信規約（プロバイダ選定/DNS認証/低ロックイン）: `docs/rules/EMAIL_RULES.md`
 - 可観測性・ログ方針: `docs/rules/OBSERVABILITY_RULES.md`
 - パフォーマンス規約（フォント/CWV）: `docs/rules/PERFORMANCE_RULES.md`
 - コンテンツ可搬性（MDX/運用）: `docs/rules/CONTENT_RULES.md`
