@@ -28,6 +28,7 @@
 
 - 開発規約: `docs/rules/DEV_RULES.md`
 - アーキテクチャ/低ロックイン方針: `docs/rules/ARCHITECTURE_RULES.md`, `docs/rules/LOW_LOCKIN_RULES.md`
+- UI/UXデザイン規約（ISO 9241/Nielsen/設計原則）: `docs/rules/DESIGN_RULES.md`
 - SEO規約（Google推奨準拠）: `docs/rules/SEO_RULES.md`
 - LLMO規約（LLM最適化 / llms.txt）: `docs/rules/LLMO_RULES.md`
 - セキュリティ規約（CSP/ヘッダー/ASVS）: `docs/rules/SECURITY_RULES.md`
@@ -86,6 +87,7 @@
 - 実装前に `docs/requirements/REQUIREMENTS.md` に立ち戻り、要件と一致しているか確認する
 - セキュリティ関連（CSP/認証/権限/入力）を変更する場合は、必ず `docs/rules/SECURITY_RULES.md` のチェック項目に照らす
 - ワイヤーフレーム/画面構成が必要な場合は、まずユーザーに提供物（Figma等で作成済みのもの）の有無を確認する。ユーザー提供があればそれを基に実装する。提供が無い場合は、AIエージェントがリポジトリ内で確認可能な静的HTMLモックを作成する。ユーザーにFigma等での新規作成を要求しない（要件定義書やSOWにもユーザー作業として記載しない）
+- ワイヤーフレーム/UIモックを作成する場合は、`docs/rules/DESIGN_RULES.md` のUI/UX設計原則に準拠すること。デザイン判断の根拠は同規約または付録のリファレンスに基づいて説明できること
 - 承認済みのワイヤーフレーム/UIモックが存在する場合、実装時に画面構成・レイアウト・要素配置の基準として参照し準拠すること。技術的制約や改善提案によりワイヤーフレームから乖離する場合は、変更箇所と理由をユーザーに説明し合意を得てから実装する
 - APIキーや秘密情報をヒアリングで受領した場合は、その場で内容を `.env.tmp`（Git管理外）に記録し、シートやIssueには「取得済/未取得」と保管場所のみ記載する。未取得の場合はTBDのまま残し、実装開始前に再確認する。
 - 監視・バックアップについては、商用サービスと併せて無料/OSS構成（例: OSSエージェント＋GitHub/クラウドスナップショット等）の可否をヒアリングで提案・すり合わせる。採用可否とコスト/リスクをユーザー合意のうえで決定する。

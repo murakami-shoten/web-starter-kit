@@ -24,7 +24,7 @@
   - `REQUIREMENTS_TEMPLATE.md`: プロジェクト固有要件定義書のテンプレ（編集禁止）。
   - `SOW_TEMPLATE.md`: フェーズ別SOW（Statement of Work）のテンプレ。
   - `projects/`: プロジェクト別の要件定義書保存場所。
-- `docs/rules/`: 開発・アーキテクチャ・SEO・セキュリティ・可観測性・可搬性・品質ゲート等の規約群。
+- `docs/rules/`: 開発・アーキテクチャ・UI/UXデザイン・SEO・セキュリティ・可観測性・可搬性・品質ゲート等の規約群。
 - `docs/runbooks/RELEASE_CHECKLIST.md`: リリース前チェックリスト。
 
 ## 前提条件

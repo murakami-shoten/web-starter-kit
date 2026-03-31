@@ -9,6 +9,7 @@
 - 要件（REQUIREMENTS.md）に対して実装範囲が一致している
 - セキュリティ要件（SECURITY_RULES）に影響が無い/あるなら説明できる
 - SEO要件（SEO_RULES）に影響が無い/あるなら説明できる
+- UI/UXデザイン規約（DESIGN_RULES）に影響が無い/あるなら説明できる
 - LLMO要件（LLMO_RULES）に影響が無い/あるなら説明できる
 
 ---
