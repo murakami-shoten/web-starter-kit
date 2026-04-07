@@ -66,8 +66,84 @@ const nextConfig = {
 
 ## 3. CSP（Next.js）
 
+### 3.1 基本方針
+
 - Next.js のガイドに沿って、nonce等を含む構成を採用する
 - `unsafe-inline` を避ける方針を優先（難しい場合は理由と期限を明記）
+
+### 3.2 GTM / GA4 / Google Ads 利用時の CSP ドメインプリセット
+
+GTM 経由で GA4・Google Ads コンバージョン計測を導入する場合、CSP で複数の Google ドメインを許可する必要がある。不足があると **コンバージョンタグがブロックされ、広告最適化に必要なデータが欠損する**（広告出稿中はインシデント級の影響）。
+
+> **実例**: `connect-src` に `*.google.com` が不足していたことで、Google Ads の `ccm/collect` エンドポイントがブロックされ、コンバージョン計測データが送信できない事象が発生した。
+
+#### 必要なドメイン一覧
+
+| ディレクティブ | ドメイン | 用途 |
+|---|---|---|
+| **script-src** | `https://www.googletagmanager.com` | GTM コンテナスクリプト |
+| | `https://www.google-analytics.com` | GA4 スクリプト |
+| | `https://www.google.com` | reCAPTCHA / Google Ads |
+| | `https://www.google.co.jp` | Google Ads（日本向け） |
+| | `https://googleads.g.doubleclick.net` | Google Ads コンバージョンタグ |
+| **connect-src** | `https://www.googletagmanager.com` | GTM 設定の取得 |
+| | `https://*.google-analytics.com` | GA4 データ送信 |
+| | `https://*.analytics.google.com` | GA4 データ送信（別ドメイン） |
+| | `https://*.google.com` | Google Ads `ccm/collect` 等 |
+| | `https://*.g.doubleclick.net` | DoubleClick 計測 |
+| | `https://googleads.g.doubleclick.net` | Google Ads コンバージョン送信 |
+| **img-src** | `https://www.googletagmanager.com` | GTM プレビューモード等 |
+| | `https://www.google.com` | Google Ads ピクセル |
+| | `https://www.google.co.jp` | Google Ads ピクセル（日本向け） |
+| | `https://googleads.g.doubleclick.net` | DoubleClick ピクセル |
+| | `https://*.google-analytics.com` | GA4 ピクセル |
+| **frame-src** | `https://td.doubleclick.net` | DoubleClick iframe |
+| | `https://www.googletagmanager.com` | GTM プレビューモード |
+
+#### 推奨実装パターン（`next.config.mjs`）
+
+`NEXT_PUBLIC_GTM_ID` の有無で条件分岐し、**GTM を使わないプロジェクトでは不要なドメインを許可しない**設計とする。
+
+```javascript
+// next.config.mjs — CSP 構築部分（抜粋）
+
+// GTM / GA4 / Google Ads 用 CSP ドメインプリセット
+const gtmCspDomains = process.env.NEXT_PUBLIC_GTM_ID
+  ? {
+      scriptSrc: [
+        "https://www.googletagmanager.com",
+        "https://www.google-analytics.com",
+        "https://www.google.com",
+        "https://www.google.co.jp",
+        "https://googleads.g.doubleclick.net",
+      ],
+      connectSrc: [
+        "https://www.googletagmanager.com",
+        "https://*.google-analytics.com",
+        "https://*.analytics.google.com",
+        "https://*.google.com",
+        "https://*.g.doubleclick.net",
+        "https://googleads.g.doubleclick.net",
+      ],
+      imgSrc: [
+        "https://www.googletagmanager.com",
+        "https://www.google.com",
+        "https://www.google.co.jp",
+        "https://googleads.g.doubleclick.net",
+        "https://*.google-analytics.com",
+      ],
+      frameSrc: [
+        "https://td.doubleclick.net",
+        "https://www.googletagmanager.com",
+      ],
+    }
+  : { scriptSrc: [], connectSrc: [], imgSrc: [], frameSrc: [] };
+
+// CSP ヘッダー構築時に展開する
+// 例: `script-src 'self' 'nonce-${nonce}' ${gtmCspDomains.scriptSrc.join(" ")};`
+```
+
+> **注意**: Google のサービスは新しいドメインを追加することがあるため、GTM 導入後はブラウザの DevTools コンソールで CSP 違反がないか定期的に確認すること。新たなブロックが発見された場合は、対象ドメインを追加し、本テンプレートにもフィードバックする。
 
 ---
 

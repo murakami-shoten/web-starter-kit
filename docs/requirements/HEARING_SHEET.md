@@ -110,7 +110,7 @@
 | 記事運用（MDX前提で良いか） | TBD | Could | 要件定義時 |
 | 構造化データ（Organization等） | TBD | Should | 実装前 |
 | Search Console / GA4 導入 | TBD | Should | 実装前 |
-| GTM（Google Tag Manager）の利用 ※GA4はGTM経由を推奨 | TBD | Must | 実装前 |
+| GTM（Google Tag Manager）の利用 ※GA4はGTM経由を推奨。利用する場合は `SECURITY_RULES.md §3.2` の CSP ドメインプリセット適用が必須 | TBD | Must | 実装前 |
 | Consent Mode v2 の初期値方針（denied / granted）※§6 クッキー同意と連動 | TBD | Must | 実装前 |
 | LLMO（LLM最適化）の要否（`llms.txt` 配置等）※詳細は `LLMO_RULES.md` 参照 | TBD | Could | リリース前 |
 

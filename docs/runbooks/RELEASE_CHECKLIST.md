@@ -47,6 +47,7 @@
 - [ ] フォームにバリデーション、レート制限、スパム対策（reCAPTCHA等）が入っていること
 - [ ] `any` 型が乱用されていないこと（`eslint-disable` が多用されていないこと）
 - [ ] 外部API呼び出しのキーがハードコードされていないこと
+- [ ] GTM を利用する場合、CSP ドメインプリセット（`SECURITY_RULES §3.2`）が適用されていること（DevTools コンソールで CSP 違反がないことを確認）
 
 ### 4.3 構成/保守性（DEV_RULES, ARCHITECTURE_RULES）
 - [ ] Next.js アプリコードが `frontend/` 配下に収まっていること
