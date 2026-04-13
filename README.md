@@ -21,9 +21,11 @@
 - `AGENTS.md`: AIエージェント向け作業ルール・不変条件（一次ソース）。
 - `docs/requirements/`:
   - `HEARING_SHEET.md`: ヒアリング入力フォーム。
-  - `REQUIREMENTS_TEMPLATE.md`: プロジェクト固有要件定義書のテンプレ（編集禁止）。
-  - `SOW_TEMPLATE.md`: フェーズ別SOW（Statement of Work）のテンプレ。
-  - `projects/`: プロジェクト別の要件定義書保存場所。
+  - `REQUIREMENTS_TEMPLATE.md`: プロジェクト固有要件定義書のテンプレ（編集禁止）。EARS記法の機能要件記述ガイドライン付き。
+  - `SOW_TEMPLATE.md`: フェーズ別SOW（Statement of Work）のテンプレ。要件IDと紐づく受入基準チェックリスト付き。
+  - `FEATURE_SPEC_TEMPLATE.md`: 複雑な個別機能の要件・設計・タスクを1セットで管理する仕様書テンプレ。
+  - `BUGFIX_SPEC_TEMPLATE.md`: 複雑なバグの根本原因分析・修正設計・リグレッション防止を構造化する仕様書テンプレ。
+  - `projects/`: プロジェクト別の要件定義書・SOW・機能仕様書の保存場所。
 - `docs/rules/`: 開発・アーキテクチャ・UI/UXデザイン・SEO・セキュリティ・可観測性・可搬性・品質ゲート等の規約群。
 - `docs/runbooks/RELEASE_CHECKLIST.md`: リリース前チェックリスト。
 
@@ -114,13 +116,10 @@ git commit -m "chore: init from web-starter-kit template"
 - 要件定義を確定 → 小さなタスクに分解 → ブランチ作成 → 必須品質ゲートを通過 → PR/レビュー → `main/staging/dev` へマージ。
 
 ## 今後の拡張（本テンプレプロジェクトとして）
-- 保守運用体制テンプレートの整備:
-  - 保守体制・責任分担表（RACI）テンプレート
-  - 障害対応ランブック（インシデント対応・復旧手順）
-  - SLA/SLO 定義テンプレート（稼働率目標・応答時間の合意書）
-  - 定期運用チェックリスト（月次パッチ確認、バックアップ検証、SSL証明書更新等）
-- GitHub コミュニティスタンダード準拠テンプレートの整備:
-  - `CONTRIBUTING.md`（コントリビューションガイドライン）
-  - `.github/ISSUE_TEMPLATE/`（Issue テンプレート）
-  - `.github/PULL_REQUEST_TEMPLATE.md`（PR テンプレート）
-  - `CODE_OF_CONDUCT.md`（行動規範）
+
+詳細は `docs/IMPROVEMENT_NOTES.md` を参照。
+
+- **仕様駆動開発（SDD）から学んだ改善余地**: 要件の構造化フォーマット、機能単位の仕様管理、自動トレーサビリティ、ワークフロー自動化、設計テンプレート
+- **保守運用体制テンプレートの整備**: RACI表、障害対応ランブック、SLA/SLO定義、定期運用チェックリスト
+- **GitHub コミュニティスタンダード準拠テンプレートの整備**: `CONTRIBUTING.md`、Issue/PRテンプレート、`CODE_OF_CONDUCT.md`
+
