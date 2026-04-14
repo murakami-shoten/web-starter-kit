@@ -145,7 +145,8 @@ Constitution の生成は spec-kit の正規フロー（`/speckit.constitution` 
 
 詳細は `docs/IMPROVEMENT_NOTES.md` を参照。
 
-- **仕様駆動開発（SDD）から学んだ改善**: `[NEEDS CLARIFICATION]` マーカー、BDD受入シナリオ（Given/When/Then）、過剰設計防止ゲート（Phase -1 Gate）を導入済み。spec-kit 連携用インストーラースクリプト（`scripts/install-for-speckit.sh`）を提供。
+- **仕様駆動開発（SDD）から学んだ改善**: ✅ 導入済み。`[NEEDS CLARIFICATION]` マーカー、BDD受入シナリオ（Given/When/Then）、過剰設計防止ゲート（Phase -1 Gate）をテンプレートに組込み。
+- **規約群の独立リポジトリ化**: ✅ 実施済み。[nextjs-web-governance](https://github.com/murakami-shoten/nextjs-web-governance) として分離し、`docs/governance/` にサブモジュールとして参照。spec-kit 連携用インストーラー（`scripts/install-for-speckit.sh`）も対応済み。
 - **保守運用体制テンプレートの整備**: RACI表、障害対応ランブック、SLA/SLO定義、定期運用チェックリスト
 - **GitHub コミュニティスタンダード準拠テンプレートの整備**: `CONTRIBUTING.md`、Issue/PRテンプレート、`CODE_OF_CONDUCT.md`
 
