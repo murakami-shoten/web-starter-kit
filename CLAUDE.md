@@ -8,5 +8,5 @@
 ## 参照順序
 
 1. `AGENTS.md` — 作業順序・不変条件・AIエージェント共通ルール（一次ソース）
-2. `docs/rules/` 配下の各規約ファイル（`AGENTS.md` §1 に参照順の記載あり）
+2. `docs/governance/rules/` 配下の各規約ファイル（`AGENTS.md` §1 に参照順の記載あり）
 3. `README.md` — プロジェクト概要・利用開始手順

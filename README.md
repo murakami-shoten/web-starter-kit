@@ -19,15 +19,15 @@
 
 ## リポジトリ構成
 - `AGENTS.md`: AIエージェント向け作業ルール・不変条件（一次ソース）。
-- `docs/requirements/`:
+- `docs/governance/requirements/`:
   - `HEARING_SHEET.md`: ヒアリング入力フォーム。
   - `REQUIREMENTS_TEMPLATE.md`: プロジェクト固有要件定義書のテンプレ（編集禁止）。EARS記法の機能要件記述ガイドライン付き。
   - `SOW_TEMPLATE.md`: フェーズ別SOW（Statement of Work）のテンプレ。要件IDと紐づく受入基準チェックリスト付き。
   - `FEATURE_SPEC_TEMPLATE.md`: 複雑な個別機能の要件・設計・タスクを1セットで管理する仕様書テンプレ。
   - `BUGFIX_SPEC_TEMPLATE.md`: 複雑なバグの根本原因分析・修正設計・リグレッション防止を構造化する仕様書テンプレ。
   - `projects/`: プロジェクト別の要件定義書・SOW・機能仕様書の保存場所。
-- `docs/rules/`: 開発・アーキテクチャ・UI/UXデザイン・SEO・セキュリティ・可観測性・可搬性・品質ゲート等の規約群。
-- `docs/runbooks/RELEASE_CHECKLIST.md`: リリース前チェックリスト。
+- `docs/governance/rules/`: 開発・アーキテクチャ・UI/UXデザイン・SEO・セキュリティ・可観測性・可搬性・品質ゲート等の規約群。
+- `docs/governance/runbooks/RELEASE_CHECKLIST.md`: リリース前チェックリスト。
 
 ## 前提条件
 
@@ -56,11 +56,11 @@ git commit -m "chore: init from web-starter-kit template"
 作成後、以下の「始め方（Definition of Ready）」に従って要件定義から進めてください。
 
 ## 始め方（Definition of Ready）
-1) `docs/requirements/HEARING_SHEET.md` を確認し、未記入項目をユーザーへ（要件定義フェーズに限り）一問一答でヒアリング。合意済みは以後再質問しない。
-2) `docs/requirements/REQUIREMENTS_TEMPLATE.md` を複製し、`docs/requirements/projects/<project_slug>/REQUIREMENTS_<project_slug>.md` を作成（テンプレは編集しない）。
+1) `docs/governance/requirements/HEARING_SHEET.md` を確認し、未記入項目をユーザーへ（要件定義フェーズに限り）一問一答でヒアリング。合意済みは以後再質問しない。
+2) `docs/governance/requirements/REQUIREMENTS_TEMPLATE.md` を複製し、`docs/projects/<project_slug>/REQUIREMENTS_<project_slug>.md` を作成（テンプレは編集しない）。
 3) ヒアリング結果を転記し、TBD/リスク/矛盾を明示。対応方針を合意。
-4) 要件が合意できたら、フェーズごとに SOW を作成・合意（テンプレ: `docs/requirements/SOW_TEMPLATE.md` → 保存: `docs/requirements/projects/<project_slug>/SOW_<phase>.md`。範囲/成果物/受入基準/リスクを明記）。
-5) `docs/rules/QUALITY_GATES.md` を満たす見通しを立ててから実装開始。
+4) 要件が合意できたら、フェーズごとに SOW を作成・合意（テンプレ: `docs/governance/requirements/SOW_TEMPLATE.md` → 保存: `docs/projects/<project_slug>/SOW_<phase>.md`。範囲/成果物/受入基準/リスクを明記）。
+5) `docs/governance/rules/QUALITY_GATES.md` を満たす見通しを立ててから実装開始。
 
 ### 設計ドキュメントの方針
 
@@ -86,13 +86,13 @@ git commit -m "chore: init from web-starter-kit template"
 - Secret scan（例: gitleaks）
 - Dependency vulnerability scan（例: OSV-Scanner）
 
-推奨（将来必須化想定）: Lighthouse CI, Pa11y CI, OWASP ZAP Baseline（DAST）, Playwright E2E, CSS Bundle Size チェック（詳細は `docs/rules/PERFORMANCE_RULES.md`）。
+推奨（将来必須化想定）: Lighthouse CI, Pa11y CI, OWASP ZAP Baseline（DAST）, Playwright E2E, CSS Bundle Size チェック（詳細は `docs/governance/rules/PERFORMANCE_RULES.md`）。
 
 ## SEO / LLMO / セキュリティ標準
 - SEO: `robots.txt` / `sitemap.xml` / 全ページの title・description・canonical・OGP/Twitter Card・必須構造化データ（Organization, WebSite, Breadcrumb）。
-- LLMO: `llms.txt` によるLLM向けサイト情報の構造化提供（`docs/rules/LLMO_RULES.md` 参照）。
+- LLMO: `llms.txt` によるLLM向けサイト情報の構造化提供（`docs/governance/rules/LLMO_RULES.md` 参照）。
 - セキュリティ: CSP を基本に、HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy など主要ヘッダーを標準適用。フォームは入力検証・CSRF/スパム対策・レート制限を設計に含める。
-- メール送信: プロバイダ選定の意思決定ツリー、DNS認証（SPF/DKIM/DMARC）、低ロックイン設計パターンを標準化（`docs/rules/EMAIL_RULES.md` 参照）。
+- メール送信: プロバイダ選定の意思決定ツリー、DNS認証（SPF/DKIM/DMARC）、低ロックイン設計パターンを標準化（`docs/governance/rules/EMAIL_RULES.md` 参照）。
 
 ## AIエージェント利用時の注意
 
@@ -110,7 +110,7 @@ git commit -m "chore: init from web-starter-kit template"
 - 本プロジェクトのルール群は「基準を示して判断を委ねる」参照型であり、固定手順に落とし込む手順型（Skills）とは性質が異なる
 - プロジェクト種別の自由度が高く、汎用的な固定ワークフローを定義しにくい
 
-代わりに `AGENTS.md`（+ `CLAUDE.md`）から `docs/rules/` を参照させるルール参照型の設計を採用しています。
+代わりに `AGENTS.md`（+ `CLAUDE.md`）から `docs/governance/rules/` を参照させるルール参照型の設計を採用しています。
 
 ## spec-kit（仕様駆動開発ツール）との連携
 

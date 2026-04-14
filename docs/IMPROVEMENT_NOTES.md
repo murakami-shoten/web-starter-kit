@@ -21,7 +21,7 @@
 | 実装前に仕様を固める | 要件→設計→タスク→実装の順を強制 | ヒアリング→要件定義→SOW→実装の順を強制（AGENTS.md §0） |
 | 承認ゲート | 各フェーズで承認してから次へ進む | 要件合意→SOW合意→品質ゲート通過の多段承認 |
 | AIの推測を禁止 | EARS形式で曖昧さを排除 | 「推測で要件を埋めない」「TBDはTBDのまま明示」 |
-| セッション間の記憶を永続化 | Steeringドキュメント（`product.md`, `tech.md`, `structure.md`） | `AGENTS.md` + `docs/rules/` 規約群 |
+| セッション間の記憶を永続化 | Steeringドキュメント（`product.md`, `tech.md`, `structure.md`） | `AGENTS.md` + `docs/governance/rules/` 規約群 |
 | タスクのトレーサビリティ | `tasks.md` + `validate-impl` | SOW受入基準 + `QUALITY_GATES.md` |
 
 ### 1.3 Web Starter Kit が優位な点
@@ -56,7 +56,7 @@
 
 **SDDツール群のアプローチ**: 機能ごとにディレクトリを切り、requirements.md → design.md → tasks.md が1セットで管理。
 
-**対応内容**: SDDの3ファイル構造をツール非依存な1ファイルに統合した `FEATURE_SPEC_TEMPLATE.md` を新規作成。保存先は `docs/requirements/projects/<project_slug>/specs/<feature_slug>.md`。加えて、バグ修正にも仕様化アプローチを適用する `BUGFIX_SPEC_TEMPLATE.md` を新規作成（「何を壊さないか」を明示するリグレッション防止の思想を導入）。`AGENTS.md` §0 に作成判断基準を追記済み。
+**対応内容**: SDDの3ファイル構造をツール非依存な1ファイルに統合した `FEATURE_SPEC_TEMPLATE.md` を新規作成。保存先は `docs/projects/<project_slug>/specs/<feature_slug>.md`。加えて、バグ修正にも仕様化アプローチを適用する `BUGFIX_SPEC_TEMPLATE.md` を新規作成（「何を壊さないか」を明示するリグレッション防止の思想を導入）。`AGENTS.md` §0 に作成判断基準を追記済み。
 
 **ステータス**: ✅ 導入済み（2026-04-13）
 
@@ -135,7 +135,7 @@
 - 連絡先リスト、ステータスページ更新手順
 - ロールバック手順（デプロイ先別）
 
-**優先度**: Medium — 本番運用開始後に必要。`docs/runbooks/INCIDENT_CHECKLIST.md` として配置予定（`QUALITY_GATES.md` §4 で既に言及あり）
+**優先度**: Medium — 本番運用開始後に必要。`docs/governance/runbooks/INCIDENT_CHECKLIST.md` として配置予定（`QUALITY_GATES.md` §4 で既に言及あり）
 
 ---
 
@@ -308,13 +308,13 @@ Constitution 自体は spec-kit の正規フロー（`/speckit.constitution` コ
 
 ### 5.5 Extension/Preset による自動配布の見送り
 
-spec-kit の拡張機構（Extension / Preset）は **コマンドとテンプレートのみ** をインストールでき、任意のドキュメントファイル（`docs/rules/` 等）を自動配布する仕組みがない。規約本体の配布には Git サブモジュールが必要であり、現時点では Extension/Preset の作成は見送る。
+spec-kit の拡張機構（Extension / Preset）は **コマンドとテンプレートのみ** をインストールでき、任意のドキュメントファイル（`docs/governance/rules/` 等）を自動配布する仕組みがない。規約本体の配布には Git サブモジュールが必要であり、現時点では Extension/Preset の作成は見送る。
 
 将来的に spec-kit に `post_install` フック等が追加された場合、再検討する。
 
 ### 5.6 将来構想
 
-- **規約群の独立リポジトリ化**: `docs/rules/`, `docs/requirements/`, `docs/runbooks/` を独立リポジトリ（`web-governance`）に分離し、Web Starter Kit と spec-kit の両方から Git サブモジュールとして参照する構成。規約の一元管理と複数プロジェクトでの再利用が可能になる。
+- **規約群の独立リポジトリ化**: `docs/governance/rules/`, `docs/governance/requirements/`, `docs/governance/runbooks/` を独立リポジトリ（`web-governance`）に分離し、Web Starter Kit と spec-kit の両方から Git サブモジュールとして参照する構成。規約の一元管理と複数プロジェクトでの再利用が可能になる。
 - **spec-kit への Feature Request**: Extension/Preset インストール時に Git サブモジュールを自動追加する機能の提案。
 
 **優先度**: Low — 複数プロジェクトで規約を共有する需要が生じた段階で着手する。

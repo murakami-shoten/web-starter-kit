@@ -1,0 +1,3 @@
+[submodule "docs/governance"]
+	path = docs/governance
+	url = https://github.com/murakami-shoten/nextjs-web-governance.git
