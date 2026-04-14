@@ -100,11 +100,7 @@ Design-First の場合: 設計 → 要件（設計から導出）→ SOW → 実
 - Next.js アプリはリポジトリ直下ではなく、将来の拡張を見据えた `frontend/` ディレクトリに配置する（ルート直下を汚さず、他サービスを並列追加できる余地を確保する）
 
 ### 2.5 規約サブモジュール（`docs/governance/`）の保護
-- `docs/governance/` は独立リポジトリ（[nextjs-web-governance](https://github.com/murakami-shoten/nextjs-web-governance)）の Git サブモジュールである。**外部プロジェクト（spec-kit 等）からも参照されている**ため、以下の構造的改変を行う場合は必ずユーザーの明示的許可を得ること:
-  - ディレクトリ名の変更（`rules/`, `requirements/`, `runbooks/`）
-  - ファイルの移動・リネーム・削除
-  - ディレクトリ階層の変更
-- ファイル内容の修正・追記は許可を必要としない（通常のメンテナンス）
+- `docs/governance/` は独立リポジトリ（[nextjs-web-governance](https://github.com/murakami-shoten/nextjs-web-governance)）の Git サブモジュールである。**外部プロジェクト（spec-kit 等）からも参照されている**ため、構造的改変（ディレクトリ名変更、ファイル移動・削除等）を行う場合は `docs/governance/README.md`「⚠️ 構造変更に関する注意」セクションに従い、必ずユーザーの明示的許可を得ること。
 - governance リポジトリへの変更は、WSK 側のサブモジュール参照の更新（`git add docs/governance && git commit`）も忘れずに行うこと
 
 ---
