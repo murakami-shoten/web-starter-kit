@@ -112,6 +112,32 @@ git commit -m "chore: init from web-starter-kit template"
 
 代わりに `AGENTS.md`（+ `CLAUDE.md`）から `docs/rules/` を参照させるルール参照型の設計を採用しています。
 
+## spec-kit（仕様駆動開発ツール）との連携
+
+本プロジェクトの規約群は、GitHub [spec-kit](https://github.com/github/spec-kit) との連携に対応しています。spec-kit は仕様駆動開発（Spec-Driven Development）のツールキットで、AI を活用した仕様策定→計画→タスク分解→実装のパイプラインを提供します。
+
+### spec-kit プロジェクトに Web Starter Kit の規約を導入する
+
+```bash
+# Step 1: spec-kit プロジェクトを作成（未作成の場合）
+specify init my-project --ai claude
+cd my-project
+
+# Step 2: インストーラースクリプトを実行
+curl -sL https://raw.githubusercontent.com/murakami-shoten/web-starter-kit/main/scripts/install-for-speckit.sh | bash
+
+# Step 3: AI エージェントで Constitution を生成
+# → スクリプトが表示する手順に従い /speckit.constitution を実行
+```
+
+インストーラーは以下を自動で行います:
+1. `docs/governance/` に本リポジトリを Git サブモジュールとして追加
+2. `.specify/memory/constitution-prompt.md`（Constitution 生成用プロンプト）を配置
+
+Constitution の生成は spec-kit の正規フロー（`/speckit.constitution` コマンド）に従い、AI エージェントが規約群を読み込んで構造化します。
+
+> **注意**: spec-kit の利用には Python 3.11+ と [uv](https://docs.astral.sh/uv/) のホストインストールが必要です。本プロジェクトの Docker 前提方針の例外として、spec-kit は開発支援ツール（ビルドパイプラインの依存ではない）として位置づけます。
+
 ## コントリビューションの流れ（例）
 - 要件定義を確定 → 小さなタスクに分解 → ブランチ作成 → 必須品質ゲートを通過 → PR/レビュー → `main/staging/dev` へマージ。
 
@@ -119,7 +145,7 @@ git commit -m "chore: init from web-starter-kit template"
 
 詳細は `docs/IMPROVEMENT_NOTES.md` を参照。
 
-- **仕様駆動開発（SDD）から学んだ改善余地**: 要件の構造化フォーマット、機能単位の仕様管理、自動トレーサビリティ、ワークフロー自動化、設計テンプレート
+- **仕様駆動開発（SDD）から学んだ改善**: `[NEEDS CLARIFICATION]` マーカー、BDD受入シナリオ（Given/When/Then）、過剰設計防止ゲート（Phase -1 Gate）を導入済み。spec-kit 連携用インストーラースクリプト（`scripts/install-for-speckit.sh`）を提供。
 - **保守運用体制テンプレートの整備**: RACI表、障害対応ランブック、SLA/SLO定義、定期運用チェックリスト
 - **GitHub コミュニティスタンダード準拠テンプレートの整備**: `CONTRIBUTING.md`、Issue/PRテンプレート、`CODE_OF_CONDUCT.md`
 
