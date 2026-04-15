@@ -88,7 +88,7 @@ Design-First の場合: 設計 → 要件（設計から導出）→ SOW → 実
 - **ホストに npm / node が無くても動く**こと（Dockerのみで起動可能）
 - 初期ポート番号は他プロジェクトと衝突しにくい値を採用し、設定で変更可能にする
 - コンテナ関連の環境変数は `docker-compose.yml` に直書きせず、リポジトリ直下の `.env` から読み込む（`.env` はコミットしない。テンプレとして `.env.example` を用意する）
-- Next.js 用の環境変数は `frontend/.env.local` に集約し、テンプレとして `frontend/.env.local.example` を必ず用意する（本番/Preview もこのキーに合わせて設定する）。`.env.local*` はGitにコミットしない。
+- Next.js 用の環境変数は `<webdir>/.env.local` に集約し、テンプレとして `<webdir>/.env.local.example` を必ず用意する（本番/Preview もこのキーに合わせて設定する）。`.env.local*` はGitにコミットしない。※ `<webdir>` はプロジェクトのWebアプリディレクトリ名（デフォルト推奨: `web/`、プロジェクト判断で変更可）
 - npm / node / npx / lint / typecheck / format / format:check / test / build などのコマンドは**必ず Docker Compose 経由**で実行する（例: `docker compose run --rm frontend npm run lint`、`docker compose run --rm frontend npm run typecheck`、`docker compose run --rm frontend npm run format:check`）。ホストで npm / npx を直接実行する前提を置かない。
 - コンテナの起動/停止/ログ/状態確認も docker compose に統一する（例: `docker compose up -d`, `docker compose stop`, `docker compose down`, `docker compose logs -f`, `docker compose ps`, `docker compose exec ...`）。`docker run` 直叩きは禁止。
 
@@ -97,7 +97,7 @@ Design-First の場合: 設計 → 要件（設計から導出）→ SOW → 実
 - セキュリティはCSP/セキュリティヘッダーを標準装備し、脆弱性チェックをCI相当に必須化する（詳細は各規約）
 
 ### 2.4 プロジェクト構造
-- Next.js アプリはリポジトリ直下ではなく、将来の拡張を見据えた `frontend/` ディレクトリに配置する（ルート直下を汚さず、他サービスを並列追加できる余地を確保する）
+- Next.js アプリはリポジトリ直下ではなく、将来の拡張を見据えた**専用のサブディレクトリ**に配置する（デフォルト推奨: `web/`。プロジェクト判断で `frontend/` 等に変更可。ルート直下を汚さず、他サービスを並列追加できる余地を確保する）
 
 ### 2.5 規約サブモジュール（`docs/governance/`）の保護
 - `docs/governance/` は独立リポジトリ（[nextjs-web-governance](https://github.com/murakami-shoten/nextjs-web-governance)）の Git サブモジュールである。**外部プロジェクト（spec-kit 等）からも参照されている**ため、構造的改変（ディレクトリ名変更、ファイル移動・削除等）を行う場合は `docs/governance/README.md`「⚠️ 構造変更に関する注意」セクションに従い、必ずユーザーの明示的許可を得ること。
