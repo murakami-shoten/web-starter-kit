@@ -9,7 +9,8 @@
 
 **実装を始める前に、必ず要件定義を完了してください。推測で実装しないこと。**
 
-ヒアリングから要件確定までの具体的な手順は `docs/governance/rules/HEARING_RULES.md` を参照すること。
+ヒアリングから要件確定までの具体的な手順は `docs/governance/rules/HEARING_RULES.md` を参照すること。  
+**最初にヒアリング深度（L1: 初期構築 / L2: 機能追加 / L3: バグ修正）を判定する**（§1.1）。
 
 6) 要件が合意できたら、フェーズごとにSOWを作成し合意する（テンプレ: `docs/governance/requirements/SOW_TEMPLATE.md`、保存先: `docs/projects/<project_slug>/SOW_<phase>.md`）  
    - ※この時点で「リリースまでに必須だが未決定」の項目（アセット、文言等）がある場合は、別途 `docs/governance/requirements/SOW_RELEASE_PREP_TEMPLATE.md` から `SOW_RELEASE_PREP.md` を作成し、開発と並行して解決する計画を立てること。  
