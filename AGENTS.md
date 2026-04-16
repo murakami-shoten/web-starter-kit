@@ -9,11 +9,8 @@
 
 **実装を始める前に、必ず要件定義を完了してください。推測で実装しないこと。**
 
-1) `docs/governance/requirements/HEARING_SHEET.md` を確認し、未記入項目を抽出  
-2) 未記入項目は**ユーザーに質問**して回答を得る（推測禁止）  
-3) まず `docs/governance/requirements/REQUIREMENTS_TEMPLATE.md` を複製し、`docs/projects/<project_slug>/REQUIREMENTS_<project_slug>.md` を作成する（テンプレは編集しない）
-4) 回答を新規作成した要件定義書に反映（TBDはTBDのまま明示）  
-5) 要件の矛盾/未確定/リスク（SEO/法務/アクセシビリティ/セキュリティ/運用）を列挙して合意を取る  
+ヒアリングから要件確定までの具体的な手順は `docs/governance/rules/HEARING_RULES.md` を参照すること。
+
 6) 要件が合意できたら、フェーズごとにSOWを作成し合意する（テンプレ: `docs/governance/requirements/SOW_TEMPLATE.md`、保存先: `docs/projects/<project_slug>/SOW_<phase>.md`）  
    - ※この時点で「リリースまでに必須だが未決定」の項目（アセット、文言等）がある場合は、別途 `docs/governance/requirements/SOW_RELEASE_PREP_TEMPLATE.md` から `SOW_RELEASE_PREP.md` を作成し、開発と並行して解決する計画を立てること。  
 7) `docs/governance/rules/QUALITY_GATES.md` のゲートに沿ってタスク分解し、実装開始
@@ -46,19 +43,15 @@
 
 ### ワークフロー選択（Requirements-First / Design-First）
 
+ワークフロー選択の詳細は `docs/governance/rules/HEARING_RULES.md` §4 を参照すること。
+
 **原則: Requirements-First**（ヒアリング → 要件定義 → SOW → 実装）を標準とする。
-
-**以下の条件に該当する場合のみ Design-First を検討**:
-- 既存のアーキテクチャ設計書/技術仕様をポーティングするプロジェクト
-- 非機能要件（レイテンシ・スループット・コンプライアンス）が要件より先に固まっている場合
-- 技術的実現可能性の検証（PoC）が先行するプロジェクト
-
-Design-First の場合: 設計 → 要件（設計から導出）→ SOW → 実装 の順で進める。
 
 ---
 
 ## 1. 参照すべき規約（この順で読む）
 
+- ヒアリング規約: `docs/governance/rules/HEARING_RULES.md`
 - 開発規約: `docs/governance/rules/DEV_RULES.md`
 - アーキテクチャ/低ロックイン方針: `docs/governance/rules/ARCHITECTURE_RULES.md`, `docs/governance/rules/LOW_LOCKIN_RULES.md`
 - UI/UXデザイン規約（ISO 9241/Nielsen/設計原則）: `docs/governance/rules/DESIGN_RULES.md`
@@ -114,7 +107,7 @@ Design-First の場合: 設計 → 要件（設計から導出）→ SOW → 実
 
 - 変更は最小単位で、意図と理由を説明する（なぜ必要か）
 - **ユーザーとの対話・質問・Artifact作成は、原則として日本語で行うこと**
-- **要件定義フェーズのヒアリングのみ、一度に全ての質問をせず、対話的に（一問一答または少数ずつ）進めること。合意済みの要件は以後繰り返し質問しないこと。**
+- ヒアリングの進め方（一問一答・推測禁止・合意済再質問禁止）は `docs/governance/rules/HEARING_RULES.md` §2.2 を参照すること
 - フロントエンドの実装/デザイン調整時は、AIエージェント自身がブラウザで挙動を確認できるよう `chrome-devtools-mcp` もしくは Playwright を必ず導入・利用し、コンソールログやレイアウト崩れを実機確認しながら作業する（手元での目視確認なしの推測修正を禁止）
   - ユーザー環境に Chrome + `chrome-devtools-mcp` が導入済みならそれを優先利用する。未導入の場合はヒアリングで許可を得てセットアップを提案し、許可が無い/環境的に難しい場合は Playwright のスクリーンショット確認など代替手段を取る
 - フロント/バックエンド共通で「車輪の再発明」を避ける。実装前に既存の共通関数・コンポーネント・ユーティリティ・ライブラリを調査し、再利用や抽出を優先する（重複実装禁止）。
