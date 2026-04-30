@@ -1,0 +1,168 @@
+# Web Starter Kit
+
+[![License: MIT](https://img.shields.io/github/license/murakami-shoten/web-starter-kit)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/murakami-shoten/web-starter-kit)](https://github.com/murakami-shoten/web-starter-kit/stargazers)
+[![GitHub last commit](https://img.shields.io/github/last-commit/murakami-shoten/web-starter-kit)](https://github.com/murakami-shoten/web-starter-kit/commits/main)
+
+このリポジトリは「あらゆるWebサイト構築」を素早く始められるテンプレート兼ベースプロジェクトです。要件定義から実装・テスト・保守計画までを一貫して進められる規範的なドキュメント群を備え、AIを活用した開発も、AIを使わないチーム開発も同じ手順で運用できます。
+
+## 対象ユーザー
+
+本プロジェクトは **Web開発・運用の基本的な流れを理解しているWeb制作者** を対象としています。具体的には、要件定義→設計→実装→テスト→デプロイ→保守のライフサイクルや、Git・Docker・CI/CDなどの基礎概念を把握していることを前提とします。Web開発未経験者向けのチュートリアルではありません。
+
+## 特徴
+- 仕様駆動開発（SDD）の思想: 「実装前に仕様を固め、推測を排除する」原則を全工程に適用。EARS記法による要件構造化、BDD受入シナリオ、過剰設計防止ゲートをテンプレートに組込み。
+- 要件定義ファースト: ヒアリングシート→要件定義書→リスク明示の流れを標準化。
+- Next.js（App Router）+ TypeScript を前提とした設計指針を提供。
+- SEO / セキュリティ / 可搬性 / 低ロックイン / 拡張性を国際標準・Google推奨・定石に沿って担保する規約付き。
+- Docker 前提で、ホストに Node/npm が無くても開発・CI を再現可能な方針。
+- AIエージェント利用時の運用ルールを明文化（日本語での逐次ヒアリング、一問一答）。
+- 規約群を[独立リポジトリ](https://github.com/murakami-shoten/nextjs-web-governance)として分離。[spec-kit](https://github.com/github/spec-kit) 等の外部ツールからもサブモジュールで参照可能。
+
+## リポジトリ構成
+- `AGENTS.md`: AIエージェント向け作業ルール・不変条件（一次ソース）。
+- `docs/governance/requirements/`:
+  - `HEARING_SHEET.md`: ヒアリング入力フォーム。
+  - `REQUIREMENTS_TEMPLATE.md`: プロジェクト固有要件定義書のテンプレ（編集禁止）。EARS記法の機能要件記述ガイドライン付き。
+  - `SOW_TEMPLATE.md`: フェーズ別SOW（Statement of Work）のテンプレ。要件IDと紐づく受入基準チェックリスト付き。
+  - `FEATURE_SPEC_TEMPLATE.md`: 複雑な個別機能の要件・設計・タスクを1セットで管理する仕様書テンプレ。
+  - `BUGFIX_SPEC_TEMPLATE.md`: 複雑なバグの根本原因分析・修正設計・リグレッション防止を構造化する仕様書テンプレ。
+  - `projects/`: プロジェクト別の要件定義書・SOW・機能仕様書の保存場所。
+- `docs/governance/rules/`: 開発・アーキテクチャ・UI/UXデザイン・SEO・セキュリティ・可観測性・可搬性・品質ゲート等の規約群。
+- `docs/governance/runbooks/RELEASE_CHECKLIST.md`: リリース前チェックリスト。
+
+## 前提条件
+
+- Git
+- Docker Desktop（macOS / Windows WSL2）
+
+## 利用開始（新規プロジェクトの作成）
+
+本リポジトリをテンプレートとして新規プロジェクトを開始する手順:
+
+### 方法A: GitHub の「Use this template」（推奨）
+
+1. GitHub上で本リポジトリの「Use this template」→「Create a new repository」を選択
+2. 新リポジトリ名を入力して作成
+3. 作成されたリポジトリをローカルにクローンし、サブモジュールを初期化:
+
+```bash
+git clone <new-repo-url>
+cd <new-project-name>
+git submodule update --init
+```
+
+> `.gitmodules` はテンプレートからコピーされるため、`git submodule add` は不要です。`git submodule update --init` だけで `docs/governance/` に規約群が展開されます。
+
+### 方法B: 手動クローン
+
+```bash
+git clone <web-starter-kit-url> <new-project-name> --recurse-submodules
+cd <new-project-name>
+
+# .git を削除するとサブモジュール関係が壊れるため、クリーンアップが必要
+rm -rf .git docs/governance .gitmodules
+git init
+git add .
+git commit -m "chore: init from web-starter-kit template"
+
+# サブモジュールを新規追加
+git submodule add https://github.com/murakami-shoten/nextjs-web-governance.git docs/governance
+git commit -m "chore: add governance submodule"
+```
+
+作成後、以下の「始め方（Definition of Ready）」に従って要件定義から進めてください。
+
+## 始め方（Definition of Ready）
+1) `docs/governance/requirements/HEARING_SHEET.md` を確認し、未記入項目をユーザーへ（要件定義フェーズに限り）一問一答でヒアリング。合意済みは以後再質問しない。
+2) `docs/governance/requirements/REQUIREMENTS_TEMPLATE.md` を複製し、`docs/projects/<project_slug>/REQUIREMENTS_<project_slug>.md` を作成（テンプレは編集しない）。
+3) ヒアリング結果を転記し、TBD/リスク/矛盾を明示。対応方針を合意。
+4) 要件が合意できたら、フェーズごとに SOW を作成・合意（テンプレ: `docs/governance/requirements/SOW_TEMPLATE.md` → 保存: `docs/projects/<project_slug>/SOW_<phase>.md`。範囲/成果物/受入基準/リスクを明記）。
+5) `docs/governance/rules/QUALITY_GATES.md` を満たす見通しを立ててから実装開始。
+
+### 設計ドキュメントの方針
+
+本プロジェクトでは **詳細設計書を独立した成果物として作成しません**。以下の3点がその役割を担います:
+
+- **要件定義書**: 「何を作るか」（機能・非機能要件、制約）
+- **ワイヤーフレーム/UIモック**: 「どう見せるか」（画面構成・レイアウト・要素配置・導線）— 画面レベルの詳細設計を兼ねる
+- **SOW**: 「いつ・何を納品するか」（スコープ・成果物・受入基準）
+
+バックエンド設計（API仕様・DB設計等）が必要な場合は、要件定義書またはSOWの成果物として個別に定義します。
+
+> **Q. なぜ詳細設計書を作成しないのか？**
+> 詳細設計書を「作らない」のではなく、より実用的な形に分解しています。従来のテキスト仕様書は「書いた時点で古くなる」「実装と乖離しやすい」「メンテされない」という課題があります。本プロジェクトでは、画面仕様は実際に動くワイヤーフレーム/HTMLモックで合意を取ることで認識のズレを防ぎ、スコープ・受入基準はSOWで明確化します。すべてGit管理されるため変更履歴も残り、納品時のトラブルも防げます。技術的に必要なドキュメント（API仕様書・DB設計書等）はSOWの成果物として個別に追加可能です。
+
+## 開発・運用方針（抜粋）
+- 環境: `dev / staging / production` を環境変数で切替。ブランチ例: `dev`→dev, `staging`→staging, `main`→prod。
+- コンテナ: Docker Compose で開発・テストを完結させる想定。初期ポートは衝突しにくい帯域（例: 43000番台）から選び、設定で変更可能にする。
+- 環境変数: リポジトリ直下の `.env` はコンテナ用（テンプレ `.env.example` をコミット）。Next.js の実行時キーは `frontend/.env.local` に集約し、テンプレ `frontend/.env.local.example` をコミットする。秘密はどちらも本番値をコミットしない。必須キーは起動時に検証して fail fast。
+- 低ロックイン: データ層は Postgres 想定、ストレージは S3 互換抽象、認証や監視は差し替え可能な境界を設計。
+
+## 品質ゲート（最小必須）
+- Lint / Typecheck / Unit・Integration Test / Build
+- Secret scan（例: gitleaks）
+- Dependency vulnerability scan（例: OSV-Scanner）
+
+推奨（将来必須化想定）: Lighthouse CI, Pa11y CI, OWASP ZAP Baseline（DAST）, Playwright E2E, CSS Bundle Size チェック（詳細は `docs/governance/rules/PERFORMANCE_RULES.md`）。
+
+## SEO / LLMO / セキュリティ標準
+- SEO: `robots.txt` / `sitemap.xml` / 全ページの title・description・canonical・OGP/Twitter Card・必須構造化データ（Organization, WebSite, Breadcrumb）。
+- LLMO: `llms.txt` によるLLM向けサイト情報の構造化提供（`docs/governance/rules/LLMO_RULES.md` 参照）。
+- セキュリティ: CSP を基本に、HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy など主要ヘッダーを標準適用。フォームは入力検証・CSRF/スパム対策・レート制限を設計に含める。
+- メール送信: プロバイダ選定の意思決定ツリー、DNS認証（SPF/DKIM/DMARC）、低ロックイン設計パターンを標準化（`docs/governance/rules/EMAIL_RULES.md` 参照）。
+
+## AIエージェント利用時の注意
+
+### 推奨モデル
+- **要件定義・タスク分解**: Gemini 3 Pro 以上
+- **詳細設計・実装**: Claude Opus 4.5 以上
+
+- 作業・質問・成果物は原則日本語。
+- ヒアリングは要件定義フェーズのみ一問一答で進め、推測で要件を埋めない（合意済み事項は再質問しない）。
+- 既存の疎結合・低ロックイン設計に反する提案をする場合は代替案と移行コストを明示。
+
+### Agent Skills について
+本プロジェクトでは Agent Skills（`.gemini/` / `.agents/` 等のワークフロー定義）を**意図的に導入していません**。理由:
+- AIエージェントごとにスキルディレクトリの規約が異なり、メンテナンスコストが増大する
+- 本プロジェクトのルール群は「基準を示して判断を委ねる」参照型であり、固定手順に落とし込む手順型（Skills）とは性質が異なる
+- プロジェクト種別の自由度が高く、汎用的な固定ワークフローを定義しにくい
+
+代わりに `AGENTS.md`（+ `CLAUDE.md`）から `docs/governance/rules/` を参照させるルール参照型の設計を採用しています。
+
+## 本テンプレートリポジトリ自体の開発
+
+`docs/governance/` は NWG リポジトリのサブモジュールとしてコミットされています。NWG 規約の同時編集には以下の手順を使用します。
+
+### NWG 規約の編集
+
+```bash
+# 1. サブモジュールを編集可能な状態にする（detached HEAD → main ブランチ）
+cd docs/governance
+git checkout main
+
+# 2. ファイルを編集・コミット・push（NWG リポジトリに反映）
+git add .
+git commit -m "fix: 〇〇を修正"
+git push origin main
+
+# 3. WSK 側でサブモジュール参照を更新
+cd ../..
+git add docs/governance
+git commit -m "chore: update governance submodule"
+```
+
+> **注意**: サブモジュールは特定のコミットを指す「ポインタ」です。NWG 側で変更を push した後、WSK 側でも `git add docs/governance && git commit` しないとポインタが古いままになります。
+
+## コントリビューションの流れ（例）
+- 要件定義を確定 → 小さなタスクに分解 → ブランチ作成 → 必須品質ゲートを通過 → PR/レビュー → `main/staging/dev` へマージ。
+
+## 今後の拡張（本テンプレプロジェクトとして）
+
+詳細は `docs/IMPROVEMENT_NOTES.md` を参照。
+
+- **仕様駆動開発（SDD）から学んだ改善**: ✅ 導入済み。`[NEEDS CLARIFICATION]` マーカー、BDD受入シナリオ（Given/When/Then）、過剰設計防止ゲート（Phase -1 Gate）をテンプレートに組込み。
+- **規約群の独立リポジトリ化**: ✅ 実施済み。[nextjs-web-governance](https://github.com/murakami-shoten/nextjs-web-governance) として分離し、`docs/governance/` にサブモジュールとして参照。spec-kit 連携（テンプレートオーバーライド + インストーラー）も governance 側に集約済み。
+- **保守運用体制テンプレートの整備**: RACI表、障害対応ランブック、SLA/SLO定義、定期運用チェックリスト
+- **GitHub コミュニティスタンダード準拠テンプレートの整備**: `CONTRIBUTING.md`、Issue/PRテンプレート、`CODE_OF_CONDUCT.md`
+

@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+.env.tmp
+node_modules
+.next
+dist
+coverage
