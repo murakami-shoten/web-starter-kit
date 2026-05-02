@@ -85,6 +85,7 @@
 - Next.js 用の環境変数は `<webdir>/.env.local` に集約し、テンプレとして `<webdir>/.env.local.example` を必ず用意する（本番/Preview もこのキーに合わせて設定する）。`.env.local*` はGitにコミットしない。※ `<webdir>` はプロジェクトのWebアプリディレクトリ名（デフォルト推奨: `web/`、プロジェクト判断で変更可）
 - npm / node / npx / lint / typecheck / format / format:check / test / build などのコマンドは**必ず Docker Compose 経由**で実行する（例: `docker compose run --rm frontend npm run lint`、`docker compose run --rm frontend npm run typecheck`、`docker compose run --rm frontend npm run format:check`）。ホストで npm / npx を直接実行する前提を置かない。
 - コンテナの起動/停止/ログ/状態確認も docker compose に統一する（例: `docker compose up -d`, `docker compose stop`, `docker compose down`, `docker compose logs -f`, `docker compose ps`, `docker compose exec ...`）。`docker run` 直叩きは禁止。
+- **プロジェクト初期構築（スキャフォールド）も Docker 経由で行うこと。** Dockerfile / docker-compose.yml が存在しない段階では、汎用 Node コンテナ（`docker run --rm -v "$(pwd):/app" -w /app node:22 ...`）を使用する。「Docker 構成がまだ無いからホスト側で npm を実行する」は禁止（詳細: `DEV_RULES §5.1`）
 
 ### 2.3 SEO / セキュリティ
 - SEOはGoogle推奨と整合し、技術要件（サイトマップ/メタ/構造化データ等）を標準実装する
